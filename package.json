@@ -1,0 +1,15 @@
+{
+  "name": "cr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently -n \"FE,BE\" -c \"white,blue\" -p \"[{name}]\"  \"cd backend && npm run dev\" \"cd frontend && npm run dev\" "
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
