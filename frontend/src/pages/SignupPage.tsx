@@ -11,7 +11,6 @@ import {
 import { LockOutlined } from "@mui/icons-material";
 import { useState } from "react";
 
-
 export const SignupPage: React.FC = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -49,7 +48,7 @@ export const SignupPage: React.FC = () => {
         <CssBaseline />
         <Box
           sx={{
-            mt: 10,
+            mt: 5,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",

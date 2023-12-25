@@ -50,7 +50,7 @@ export const LoginPage: React.FC = () => {
         <CssBaseline />
         <Box
           sx={{
-            mt: 10,
+            mt: 5,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
