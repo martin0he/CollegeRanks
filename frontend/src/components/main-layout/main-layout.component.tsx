@@ -42,7 +42,6 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                 <Typography
                   sx={{
                     width: "fit-content",
-                    color: "#880C79",
                     fontSize: "1.75em",
                     fontWeight: "600",
                   }}

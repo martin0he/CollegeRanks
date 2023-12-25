@@ -26,7 +26,7 @@ const navigationItems = [
     to: SectionIdEnum.home,
   },
   {
-    text: "Ranking",
+    text: "Rankings",
     to: SectionIdEnum.ranking,
   },
   {
@@ -105,7 +105,7 @@ export const Navigation: React.FC<NavigationProps> = ({ isSmall }) => {
         >
           <AppBar
             position="static"
-            sx={{ background: "#F5E8D2", color: "text.primary" }}
+            sx={{ background: "#F5E8D2", color: "#880C79" }}
           >
             <Toolbar>
               <Typography variant="h5" sx={{ flexGrow: 1 }}>

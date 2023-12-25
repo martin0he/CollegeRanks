@@ -1,6 +1,12 @@
 {
-  "exclude": ["node_modules"],
   "compilerOptions": {
-    "esModuleInterop": true
-  }
+    "module": "NodeNext",
+    "moduleResolution": "Node",
+    "baseUrl": "src",
+    "outDir": "dist",
+    "sourceMap": true,
+    "noImplicitAny": true,
+
+  },
+  "include": ["src/**/*"],
 }

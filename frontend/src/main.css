@@ -11,13 +11,14 @@
 body{
     font-family: 'Jost', sans-serif;
     background-color: #ede7d8;
-    color: #880C79;
+    color: #98198a;
+    
 }
 
 .mast{
     position: sticky;
     background: #e7d3b0;
-    height: 5vh;
+    height: fit-content;
     width: 100%;
     display: flex;
     align-items: center;
