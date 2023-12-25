@@ -50,12 +50,14 @@ export const ReviewPage: React.FC = () => {
 
 
   return (
+
     <Box
       py={4}
       width="45%"
       height="60%"
       sx={{ justifyContent: "center", alignItems: "center", direction: "flex" }}
     >
+      <Typography variant="h4" mb={3}><b>Review Your School</b></Typography>
       <Grid container spacing={2}>
         {metrics.map((metric, index) => (
           <Grid item xs={6} key={metric}>
