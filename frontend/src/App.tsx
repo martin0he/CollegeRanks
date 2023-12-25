@@ -33,17 +33,15 @@ const sections = [
 
 export const App: React.FC = () => {
   return (
-    <>
-      <MainLayout>
-        {sections.map(({ component, sectionId }) => {
-          return (
-            <SectionContainer sectionId={sectionId} key={sectionId}>
-              <Divider />
-              {component}
-            </SectionContainer>
-          );
-        })}
-      </MainLayout>
-    </>
+    <MainLayout>
+      {sections.map(({ component, sectionId }) => {
+        return (
+          <SectionContainer sectionId={sectionId} key={sectionId}>
+            <Divider />
+            {component}
+          </SectionContainer>
+        );
+      })}
+    </MainLayout>
   );
 };

@@ -7,8 +7,11 @@ import {
   Typography,
   TextField,
   Button,
+  Grid,
 } from "@mui/material";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+
 
 
 export const LoginPage: React.FC = () => {
@@ -31,7 +34,7 @@ export const LoginPage: React.FC = () => {
       if (response.ok) {
         // Authentication successful, redirect or handle accordingly
         console.log("Login successful!");
-        //history.push("/dashboard"); // Redirect to dashboard or another route
+        //history.push()
       } else {
         // Authentication failed
         console.log("Login failed. Please check your credentials.");
@@ -100,6 +103,11 @@ export const LoginPage: React.FC = () => {
             >
               Login
             </Button>
+            <Grid container justifyContent={"flex-end"}>
+              <Grid item>
+                <a href="#signup">Don't have an account? Register Here</a>
+              </Grid>
+            </Grid>
           </Box>
         </Box>
       </Container>

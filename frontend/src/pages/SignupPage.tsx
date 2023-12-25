@@ -112,6 +112,11 @@ export const SignupPage: React.FC = () => {
             >
               Register
             </Button>
+            <Grid container justifyContent={"flex-end"}>
+              <Grid item>
+                <a href="#login">Already have an account? Login Here</a>
+              </Grid>
+            </Grid>
           </Box>
         </Box>
       </Container>
