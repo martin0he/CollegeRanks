@@ -10,14 +10,38 @@ import {
 } from "@mui/material";
 import { LockOutlined } from "@mui/icons-material";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+
 
 export const SignupPage: React.FC = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleRegister = async () => {};
+  const handleRegister = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: name,
+          email: email,
+          password: password,
+        }),
+      });
+
+      if (response.ok) {
+        // Registration successful, handle accordingly
+        console.log("Registration successful!");
+      } else {
+        // Registration failed
+        console.error("Registration failed. Please check your input.");
+      }
+    } catch (error) {
+      console.error("Error during registration:", error);
+    }
+  };
 
   return (
     <>

@@ -7,16 +7,39 @@ import {
   Typography,
   TextField,
   Button,
-  Grid,
 } from "@mui/material";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+
 
 export const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {};
+  const handleLogin = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      });
+
+      if (response.ok) {
+        // Authentication successful, redirect or handle accordingly
+        console.log("Login successful!");
+        //history.push("/dashboard"); // Redirect to dashboard or another route
+      } else {
+        // Authentication failed
+        console.log("Login failed. Please check your credentials.");
+      }
+    } catch (error) {
+      console.log("Error during login:", error);
+    }
+  };
 
   return (
     <>
