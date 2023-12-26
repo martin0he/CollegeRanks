@@ -26,22 +26,8 @@ const DropDown: React.FC = () => {
 
   return (
     <div>
-      <Select
-          labelId="demo-simple-select-autowidth-label"
-          id="demo-simple-select-autowidth"
-          value=""
-          onChange={handleSelectChange}
-          autoWidth
-          label="Age"
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Twenty</MenuItem>
-          <MenuItem value={21}>Twenty one</MenuItem>
-          <MenuItem value={22}>Twenty one and a half</MenuItem>
-        </Select>
-      {/*<select id="dropdown" value={selectedOption || ''} onChange={handleSelectChange}>
+      
+      <select id="dropdown" value={selectedOption || ''} onChange={handleSelectChange}>
         <option value="" disabled>
           Select your school:
         </option>
@@ -50,7 +36,7 @@ const DropDown: React.FC = () => {
             {option}
           </option>
         ))}
-        </select>*/}
+        </select>
     </div>
   );
 };

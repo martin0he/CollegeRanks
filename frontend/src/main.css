@@ -28,8 +28,10 @@ body{
 
 select{
     font-family: 'Jost', sans-serif;
-    width: fit-content;
+    width: 45%;
     height: fit-content;
     padding: 5px;
     color: #98198a;
+    margin-bottom: 20px;
+    
 }
