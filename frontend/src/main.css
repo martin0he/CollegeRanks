@@ -25,3 +25,11 @@ body{
     align-items: center;
     justify-content: center; 
 }
+
+select{
+    font-family: 'Jost', sans-serif;
+    width: fit-content;
+    height: fit-content;
+    padding: 5px;
+    color: #98198a;
+}

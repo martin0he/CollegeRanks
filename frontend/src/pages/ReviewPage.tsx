@@ -1,5 +1,6 @@
 import { Box, Grid, Slider, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
+import DropdownWithDatabase from "../components/review-layout/DropDown";
 
 export const ReviewPage: React.FC = () => {
   const metrics = [
@@ -75,49 +76,56 @@ export const ReviewPage: React.FC = () => {
     return weightSum !== 0 ? sum / weightSum : 0;
   };
   return (
-    <Box
-      py={4}
-      width="45%"
-      height="40%"
-      sx={{ justifyContent: "center", alignItems: "center", direction: "flex" }}
-    >
-      <Typography variant="h4" mb={3}>
-        <b>Review Your School</b>
-      </Typography>
-      <Grid container spacing={2}>
-        {Object.keys(weights).map((metric) => (
-          <Grid item xs={6} key={metric}>
-            <Typography variant="subtitle2" gutterBottom>
-              {metric}
-            </Typography>
+    <>
+      <Box
+        py={4}
+        width="45%"
+        height="40%"
+        sx={{
+          justifyContent: "center",
+          alignItems: "center",
+          direction: "flex",
+        }}
+      >
+        <Typography variant="h4" mb={3}>
+          <b>Review Your School</b>
+        </Typography>
+        <Grid container spacing={2}>
+          {Object.keys(weights).map((metric) => (
+            <Grid item xs={6} key={metric}>
+              <Typography variant="subtitle2" gutterBottom>
+                {metric}
+              </Typography>
 
-            <Slider
-              size="small"
-              valueLabelDisplay="auto"
-              aria-label="pretto slider"
-              value={sliderValues[metric]}
-              onChange={handleSliderChange(metric)}
-              onBlur={handleBlur(metric)}
-              sx={{ color: "inherit" }}
-            />
-            <TextField
-              size="small"
-              id={`${metric}-input`}
-              variant="outlined"
-              value={sliderValues[metric]}
-              onChange={handleInputChange(metric)}
-              onBlur={handleBlur(metric)}
-              inputProps={{
-                step: 1,
-                min: 0,
-                max: 100,
-                type: "number",
-              }}
-            />
-          </Grid>
-        ))}
-      </Grid>
-      <Typography>{`Avg is ${calculateWeightedAverage()}`}</Typography>
-    </Box>
+              <Slider
+                size="small"
+                valueLabelDisplay="auto"
+                aria-label="pretto slider"
+                value={sliderValues[metric]}
+                onChange={handleSliderChange(metric)}
+                onBlur={handleBlur(metric)}
+                sx={{ color: "inherit" }}
+              />
+              <TextField
+                size="small"
+                id={`${metric}-input`}
+                variant="outlined"
+                value={sliderValues[metric]}
+                onChange={handleInputChange(metric)}
+                onBlur={handleBlur(metric)}
+                inputProps={{
+                  step: 1,
+                  min: 0,
+                  max: 100,
+                  type: "number",
+                }}
+              />
+            </Grid>
+          ))}
+        </Grid>
+        <Typography>{`Avg is ${calculateWeightedAverage()}`}</Typography>
+      </Box>
+      <DropdownWithDatabase />
+    </>
   );
 };
