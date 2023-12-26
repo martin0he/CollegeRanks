@@ -9,6 +9,6 @@ export const UniModel = mongoose.model("Uni", UniSchema);
 
 export const getUnis = () => UniModel.find();
 
-export const getUniByName = (name: string) => UniModel.findOne({ name });
+export const getUniById = (id: string) => UniModel.findById(id);
 
-export const updateUniByName = (name: string, values: Record<number, any>) => UniModel.findByIdAndUpdate(name, values);
+export const updateUniById = (id: string, values: Record<string, any>) => UniModel.findByIdAndUpdate(id, values);

@@ -14,6 +14,7 @@ import { useState } from "react";
 
 
 
+
 export const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,7 +35,7 @@ export const LoginPage: React.FC = () => {
       if (response.ok) {
         // Authentication successful, redirect or handle accordingly
         console.log("Login successful!");
-        //history.push()
+        
       } else {
         // Authentication failed
         console.log("Login failed. Please check your credentials.");

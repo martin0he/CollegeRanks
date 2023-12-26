@@ -6,5 +6,5 @@ import { getAllUnis, updateUni } from "../controllers/unis";
 
 export default (router: express.Router) => {
     router.get('/unis', getAllUnis);
-    router.patch('/unis/:name', updateUni);
+    router.patch('/unis/:id', updateUni);
 };

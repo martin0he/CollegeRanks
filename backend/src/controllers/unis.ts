@@ -1,6 +1,6 @@
 import express from "express";
 
-import { getUniByName, getUnis } from "../db/unis";
+import { getUnis, getUniById } from "../db/unis";
 
 export const getAllUnis = async (
   req: express.Request,
@@ -16,35 +16,25 @@ export const getAllUnis = async (
   }
 };
 
-
 export const updateUni = async (
   req: express.Request,
   res: express.Response
 ) => {
   try {
-    const { name, newRanking } = req.body;
+    const { id } = req.params;
+    const { rating } = req.body;
 
-    if (!name || !newRanking || isNaN(newRanking)) {
+    if (!rating) {
       return res.sendStatus(400);
     }
 
-    // Fetch the existing uni by name
-    const uni = await getUniByName(name);
-
-    // Check if the uni with the provided name exists
-    if (!uni) {
-      return res.status(404).json({ message: 'University not found' });
-    }
-
-    // Update the uni's ranking
-    uni.RATING = Number(newRanking);
-
-    // Save the changes
+    const uni = await getUniById(id);
+    uni.RATING = rating;
     await uni.save();
 
     return res.status(200).json(uni).end();
   } catch (error) {
-    console.error(error);
-    return res.sendStatus(500);
+    console.log(error);
+    return res.sendStatus(400);
   }
 };
