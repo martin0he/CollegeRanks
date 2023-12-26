@@ -1,6 +1,14 @@
-import { Box, Grid, Slider, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
-import DropdownWithDatabase from "../components/review-layout/DropDown";
+import {
+  Box,
+  Button,
+  Grid,
+  Slider,
+  TextField,
+  Typography,
+} from "@mui/material";
+import React, { useEffect, useState } from "react";
+
+import axios from "axios";
 
 export const ReviewPage: React.FC = () => {
   const metrics = [
@@ -75,6 +83,56 @@ export const ReviewPage: React.FC = () => {
     );
     return weightSum !== 0 ? sum / weightSum : 0;
   };
+
+  const [options, setOptions] = useState<string[]>([]);
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Make API call to fetch options from the database
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/unis");
+        setOptions(response.data); // Assuming the API returns an array of strings
+      } catch (error) {
+        console.error("Error fetching options:", error);
+      }
+    };
+
+    fetchData();
+  }, []); // Empty dependency array ensures the effect runs only once on mount
+
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedOption(event.target.value);
+  };
+
+  const handleSubmit = async () => {
+    try {
+      // Call the backend API to get the university by name
+      const response = await axios.get(
+        `http://localhost:8080/uni/${selectedOption}`
+      );
+
+      if (response.data) {
+        const selectedUni = response.data; // Assuming the API response structure
+
+        // Update the rating on the server
+        const updateResponse = await axios.patch(
+          `http://localhost:8080/unis/${selectedUni._id}`,
+          {
+            rating: calculateWeightedAverage()
+          }
+        );
+
+        // Log the updated university (replace with your actual update logic)
+        console.log("Updated University:", updateResponse.data.updatedUni);
+      } else {
+        console.error("University not found");
+      }
+    } catch (error) {
+      console.log("Error updating rating:", error);
+    }
+  };
+
   return (
     <>
       <Box
@@ -125,7 +183,25 @@ export const ReviewPage: React.FC = () => {
         </Grid>
         <Typography>{`Avg is ${calculateWeightedAverage()}`}</Typography>
       </Box>
-      <DropdownWithDatabase />
+      <div>
+        <select
+          id="dropdown"
+          value={selectedOption || ""}
+          onChange={handleSelectChange}
+        >
+          <option value="" disabled>
+            Select your school:
+          </option>
+          {options.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+        <Button variant="contained" color="primary" onClick={handleSubmit}>
+          Submit
+        </Button>
+      </div>
     </>
   );
 };

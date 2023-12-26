@@ -11,4 +11,6 @@ export const getUnis = () => UniModel.find();
 
 export const getUniById = (id: string) => UniModel.findById(id);
 
+export const getUniByName = (name: string) => UniModel.findOne({ name });
+
 export const updateUniById = (id: string, values: Record<string, any>) => UniModel.findByIdAndUpdate(id, values);

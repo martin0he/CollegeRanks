@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { MenuItem, Select } from '@mui/material';
+import { Button } from '@mui/material';
 
 const DropDown: React.FC = () => {
   const [options, setOptions] = useState<string[]>([]);
@@ -24,6 +24,8 @@ const DropDown: React.FC = () => {
     setSelectedOption(event.target.value);
   };
 
+
+
   return (
     <div>
       
@@ -37,7 +39,11 @@ const DropDown: React.FC = () => {
           </option>
         ))}
         </select>
+        <Button variant="contained" color="primary">
+        Submit
+      </Button>
     </div>
+    
   );
 };
 
