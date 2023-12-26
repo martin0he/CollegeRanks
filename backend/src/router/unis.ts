@@ -1,13 +1,14 @@
 import express from "express";
 
 
-import { getAllUnis, getUniName, updateUni } from "../controllers/unis";
+import { getAllUnis, getUni, getUniID, updateUni } from "../controllers/unis";
 
 
 
 
 export default (router: express.Router) => {
-    router.get('/unis', getAllUnis);
-    router.get('/uni/:name', getUniName);
-    router.patch('/unis/:id', updateUni);
+    router.get('/unis', getAllUnis);  //works
+    router.get('/uni/:name', getUni);   //doesnt work
+    router.get('/uni/id/:id', getUniID);  //works
+    router.patch('/unis/:id', updateUni);  //works
 };

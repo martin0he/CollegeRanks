@@ -32,6 +32,26 @@ select{
     height: fit-content;
     padding: 5px;
     color: #98198a;
-    margin-bottom: 20px;
-    
+    margin-bottom: 20px;   
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 0.7rem;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background-color: #ede7d8
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #98198a;
+    border-radius: 25px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover{
+    background: #711266;
+    
+  }

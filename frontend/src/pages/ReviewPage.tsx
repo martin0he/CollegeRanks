@@ -109,22 +109,25 @@ export const ReviewPage: React.FC = () => {
     try {
       // Call the backend API to get the university by name
       const response = await axios.get(
-        `http://localhost:8080/uni/${selectedOption}`
+        `http://localhost:8080/uni/${selectedOption}` //so this doesnt work either
       );
+      console.log(selectedOption); //works
+      console.log(response.data); //doesn't work
 
       if (response.data) {
         const selectedUni = response.data; // Assuming the API response structure
 
         // Update the rating on the server
         const updateResponse = await axios.patch(
+          //works, but receives wrong input from .get
           `http://localhost:8080/unis/${selectedUni._id}`,
           {
-            rating: calculateWeightedAverage()
+            rating: calculateWeightedAverage(),
           }
         );
 
         // Log the updated university (replace with your actual update logic)
-        console.log("Updated University:", updateResponse.data.updatedUni);
+        console.log("Updated University:", updateResponse.data);
       } else {
         console.error("University not found");
       }
@@ -134,74 +137,102 @@ export const ReviewPage: React.FC = () => {
   };
 
   return (
-    <>
-      <Box
-        py={4}
-        width="45%"
-        height="40%"
-        sx={{
-          justifyContent: "center",
-          alignItems: "center",
-          direction: "flex",
-        }}
-      >
-        <Typography variant="h4" mb={3}>
-          <b>Review Your School</b>
-        </Typography>
-        <Grid container spacing={2}>
-          {Object.keys(weights).map((metric) => (
-            <Grid item xs={6} key={metric}>
-              <Typography variant="subtitle2" gutterBottom>
-                {metric}
-              </Typography>
+    <Box>
+      <Grid container direction="column" rowSpacing={1}>
+        <Grid item>
+          <Box
+            py={4}
+            sx={{
+              justifyContent: "center",
+              alignItems: "center",
+              direction: "flex",
+            }}
+          >
+            <Typography variant="h4" mb={3}>
+              <b>Review Your School</b>
+            </Typography>
+            <Grid container direction="row" spacing={2}>
+              {Object.keys(weights).map((metric) => (
+                <Grid item xs={6} key={metric}>
+                  <Typography variant="subtitle2" gutterBottom>
+                    {metric}
+                  </Typography>
 
-              <Slider
-                size="small"
-                valueLabelDisplay="auto"
-                aria-label="pretto slider"
-                value={sliderValues[metric]}
-                onChange={handleSliderChange(metric)}
-                onBlur={handleBlur(metric)}
-                sx={{ color: "inherit" }}
-              />
-              <TextField
-                size="small"
-                id={`${metric}-input`}
-                variant="outlined"
-                value={sliderValues[metric]}
-                onChange={handleInputChange(metric)}
-                onBlur={handleBlur(metric)}
-                inputProps={{
-                  step: 1,
-                  min: 0,
-                  max: 100,
-                  type: "number",
-                }}
-              />
+                  <Slider
+                    size="small"
+                    valueLabelDisplay="auto"
+                    aria-label="pretto slider"
+                    value={sliderValues[metric]}
+                    onChange={handleSliderChange(metric)}
+                    onBlur={handleBlur(metric)}
+                    sx={{ color: "inherit" }}
+                  />
+                  <TextField
+                    size="small"
+                    id={`${metric}-input`}
+                    variant="outlined"
+                    value={sliderValues[metric]}
+                    onChange={handleInputChange(metric)}
+                    onBlur={handleBlur(metric)}
+                    inputProps={{
+                      step: 1,
+                      min: 0,
+                      max: 100,
+                      type: "number",
+                    }}
+                  />
+                </Grid>
+              ))}
             </Grid>
-          ))}
+            <Box
+              py={2}
+              sx={{
+                justifyContent: "center",
+                alignItems: "center",
+                display: "flex",
+              }}
+            >
+              <Typography
+                sx={{ fontWeight: "bold" }}
+              >{`Score: ${calculateWeightedAverage().toFixed(2)}`}</Typography>
+            </Box>
+          </Box>
         </Grid>
-        <Typography>{`Avg is ${calculateWeightedAverage()}`}</Typography>
-      </Box>
-      <div>
-        <select
-          id="dropdown"
-          value={selectedOption || ""}
-          onChange={handleSelectChange}
+
+        <Grid
+          item
+          sx={{
+            justifyContent: "center",
+            alignItems: "center",
+            display: "flex",
+          }}
         >
-          <option value="" disabled>
-            Select your school:
-          </option>
-          {options.map((option) => (
-            <option key={option} value={option}>
-              {option}
+          <select
+            id="dropdown"
+            value={selectedOption || ""}
+            onChange={handleSelectChange}
+          >
+            <option value="" disabled>
+              Select your school:
             </option>
-          ))}
-        </select>
-        <Button variant="contained" color="primary" onClick={handleSubmit}>
-          Submit
-        </Button>
-      </div>
-    </>
+            {options.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </Grid>
+        <Grid item sx={{
+              justifyContent: "center",
+              alignItems: "center",
+              display: "flex",
+              marginBottom: "20px"
+            }}>
+        <Button variant="contained" color="inherit" onClick={handleSubmit}>
+            Submit
+          </Button>
+        </Grid>
+      </Grid>
+    </Box>
   );
 };

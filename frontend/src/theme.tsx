@@ -7,4 +7,9 @@ export const theme = createTheme({
       color: '#880C79'
     }
   },
+  palette: {
+    background: {
+      default: "#ede7d8" 
+    }
+  }
 });
