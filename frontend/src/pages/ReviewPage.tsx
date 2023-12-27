@@ -141,11 +141,7 @@ export const ReviewPage: React.FC = () => {
           <Box
             py={4}
             px={3}
-            sx={{
-              justifyContent: "center",
-              alignItems: "center",
-              direction: "flex",
-            }}
+            
           >
             <Typography variant="h4" mb={3}>
               <b>Review Your School</b>
