@@ -1,6 +1,6 @@
 import express from "express";
 
-import { getUnis, getUniById, getUniByName } from "../db/unis";
+import { getUnis, getUniById, getUniByName, updateUniById } from "../db/unis";
 
 //works
 export const getAllUniNames = async (
@@ -78,11 +78,9 @@ export const updateUni = async (
       return res.sendStatus(400);
     }
 
-    const uni = await getUniById(id);
-    uni.rating = rating;
-    await uni.save();
+    const updatedUni = await updateUniById(id, rating);
 
-    return res.status(200).json(uni).end();
+    return res.status(200).json(updatedUni).end();
   } catch (error) {
     console.log(error);
     return res.sendStatus(400);

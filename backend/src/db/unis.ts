@@ -2,7 +2,8 @@ import mongoose from "mongoose";
 
 const UniSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  rating: { type: Number, required: true },
+  rating: { type: [Number], required: true },
+  country: { type: String, required: false },
 });
 
 export const UniModel = mongoose.model("Uni", UniSchema);
@@ -22,5 +23,9 @@ export const getUniByName = async (name: string) => {
     throw error;
   }
 };
-export const updateUniById = (id: string, values: Record<string, any>) =>
-  UniModel.findByIdAndUpdate(id, values); //works
+export const updateUniById = (id: string, rating: Number) =>
+  UniModel.findByIdAndUpdate(
+    id,
+    { $push: { rating: rating } },
+    { new: true }                  // Set to true to return the modified document rather than the original
+  ); 
