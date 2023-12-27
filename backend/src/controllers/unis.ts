@@ -9,7 +9,7 @@ export const getAllUnis = async (
 ) => {
   try {
     const unis = await getUnis();
-    const uniNames = unis.map((uni) => uni.NAME);
+    const uniNames = unis.map((uni) => uni.name);
     return res.status(200).json(uniNames);
   } catch (error) {
     console.log(error);
@@ -21,11 +21,21 @@ export const getAllUnis = async (
 export const getUni = async (req: express.Request, res: express.Response) => {
   try {
     const { name } = req.body;
+
+    if (!name) {
+      return res.status(400).json({ error: "Name parameter is required." });
+    }
+
     const uni = await getUniByName(name);
-    return res.status(200).json(uni);
+
+    if (uni) {
+      return res.status(200).json(uni);
+    } else {
+      return res.status(404).json({ error: "University not found." });
+    }
   } catch (error) {
-    console.log(error);
-    return res.sendStatus(400);
+    console.error("Error getting university by name:", error.message);
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
@@ -55,7 +65,7 @@ export const updateUni = async (
     }
 
     const uni = await getUniById(id);
-    uni.RATING = rating;
+    uni.rating = rating;
     await uni.save();
 
     return res.status(200).json(uni).end();

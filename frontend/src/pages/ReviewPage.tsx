@@ -34,7 +34,7 @@ export const ReviewPage: React.FC = () => {
   };
 
   const [sliderValues, setSliderValues] = useState<{ [key: string]: number }>(
-    metrics.reduce((acc, metric) => ({ ...acc, [metric]: 30 }), {})
+    metrics.reduce((acc, metric) => ({ ...acc, [metric]: 50 }), {})
   );
 
   const handleSliderChange =
@@ -108,11 +108,9 @@ export const ReviewPage: React.FC = () => {
   const handleSubmit = async () => {
     try {
       // Call the backend API to get the university by name
-      const response = await axios.get(
-        `http://localhost:8080/uni/${selectedOption}` //so this doesnt work either
-      );
-      console.log(selectedOption); //works
-      console.log(response.data); //doesn't work
+      const response = await axios.post("http://localhost:8080/uni", {
+        name: selectedOption,
+      });
 
       if (response.data) {
         const selectedUni = response.data; // Assuming the API response structure
@@ -142,6 +140,7 @@ export const ReviewPage: React.FC = () => {
         <Grid item>
           <Box
             py={4}
+            px={3}
             sx={{
               justifyContent: "center",
               alignItems: "center",
@@ -222,13 +221,16 @@ export const ReviewPage: React.FC = () => {
             ))}
           </select>
         </Grid>
-        <Grid item sx={{
-              justifyContent: "center",
-              alignItems: "center",
-              display: "flex",
-              marginBottom: "20px"
-            }}>
-        <Button variant="contained" color="inherit" onClick={handleSubmit}>
+        <Grid
+          item
+          sx={{
+            justifyContent: "center",
+            alignItems: "center",
+            display: "flex",
+            marginBottom: "20px",
+          }}
+        >
+          <Button variant="contained" color="inherit" onClick={handleSubmit}>
             Submit
           </Button>
         </Grid>

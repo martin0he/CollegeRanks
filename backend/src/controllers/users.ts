@@ -1,7 +1,7 @@
 import express from "express";
 
 
-import { deleteUserById, getUserById, getUsers } from "../db/users";
+import { deleteUserById, getUserByEmail, getUserById, getUsers } from "../db/users";
 
 export const getAllUsers = async (req: express.Request, res: express.Response) => {
     try {
@@ -42,6 +42,17 @@ export const updateUser = async (req: express.Request, res: express.Response) =>
         await user.save();
 
         return res.status(200).json(user).end();
+    } catch(error) {
+        console.log(error);
+        return res.sendStatus(400);
+    }
+}
+
+export const getUserEmail = async (req: express.Request, res: express.Response) => {
+    try {
+        const { email } = req.body;
+        const user = await getUserByEmail(email);
+        return res.status(200).json(user);
     } catch(error) {
         console.log(error);
         return res.sendStatus(400);
