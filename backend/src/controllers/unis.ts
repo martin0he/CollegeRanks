@@ -3,7 +3,7 @@ import express from "express";
 import { getUnis, getUniById, getUniByName } from "../db/unis";
 
 //works
-export const getAllUnis = async (
+export const getAllUniNames = async (
   req: express.Request,
   res: express.Response
 ) => {
@@ -17,7 +17,21 @@ export const getAllUnis = async (
   }
 };
 
-//doesnt work
+//works
+export const getAllUnis = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  try {
+    const unis = await getUnis();
+    return res.status(200).json(unis);
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(400);
+  }
+};
+
+//works
 export const getUni = async (req: express.Request, res: express.Response) => {
   try {
     const { name } = req.body;

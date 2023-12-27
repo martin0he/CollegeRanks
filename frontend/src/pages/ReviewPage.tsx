@@ -91,7 +91,7 @@ export const ReviewPage: React.FC = () => {
     // Make API call to fetch options from the database
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/unis");
+        const response = await axios.get("http://localhost:8080/uninames");
         setOptions(response.data); // Assuming the API returns an array of strings
       } catch (error) {
         console.error("Error fetching options:", error);
