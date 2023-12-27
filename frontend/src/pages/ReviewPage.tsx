@@ -1,4 +1,5 @@
 import {
+  Autocomplete,
   Box,
   Button,
   Grid,
@@ -9,6 +10,7 @@ import {
 import React, { useEffect, useState } from "react";
 
 import axios from "axios";
+
 
 export const ReviewPage: React.FC = () => {
   const metrics = [
@@ -84,32 +86,29 @@ export const ReviewPage: React.FC = () => {
     return weightSum !== 0 ? sum / weightSum : 0;
   };
 
-  const [options, setOptions] = useState<string[]>([]);
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [universities, setUniversities] = useState([]);
+  const [selectedUniversity, setSelectedUniversity] = useState(null);
+  const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
-    // Make API call to fetch options from the database
-    const fetchData = async () => {
+    // Fetch the list of universities from your API endpoint
+    const fetchUniversities = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/uninames");
-        setOptions(response.data); // Assuming the API returns an array of strings
+        const response = await axios.get("http://localhost:8080/uninames"); // Replace with your actual API endpoint
+        setUniversities(response.data);
       } catch (error) {
-        console.error("Error fetching options:", error);
+        console.error("Error fetching universities:", error);
       }
     };
 
-    fetchData();
-  }, []); // Empty dependency array ensures the effect runs only once on mount
-
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedOption(event.target.value);
-  };
+    fetchUniversities();
+  }, []);
 
   const handleSubmit = async () => {
     try {
       // Call the backend API to get the university by name
       const response = await axios.post("http://localhost:8080/uni", {
-        name: selectedOption,
+        name: selectedUniversity,
       });
 
       if (response.data) {
@@ -138,11 +137,7 @@ export const ReviewPage: React.FC = () => {
     <Box>
       <Grid container direction="column" rowSpacing={1}>
         <Grid item>
-          <Box
-            py={4}
-            px={3}
-            
-          >
+          <Box py={2} px={3}>
             <Typography variant="h4" mb={3}>
               <b>Review Your School</b>
             </Typography>
@@ -180,7 +175,7 @@ export const ReviewPage: React.FC = () => {
               ))}
             </Grid>
             <Box
-              py={2}
+              py={1}
               sx={{
                 justifyContent: "center",
                 alignItems: "center",
@@ -193,29 +188,39 @@ export const ReviewPage: React.FC = () => {
             </Box>
           </Box>
         </Grid>
-
         <Grid
           item
           sx={{
             justifyContent: "center",
             alignItems: "center",
             display: "flex",
+            paddingBottom: 2
           }}
         >
-          <select
-            id="dropdown"
-            value={selectedOption || ""}
-            onChange={handleSelectChange}
-          >
-            <option value="" disabled>
-              Select your school:
-            </option>
-            {options.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
+          <Box>
+          <Autocomplete
+            options={universities}
+            getOptionLabel={(universities) => universities} // Adjust based on the structure of your university objects
+            value={selectedUniversity}
+            onChange={(event, newValue) => {
+              setSelectedUniversity(newValue);
+            }}
+            inputValue={inputValue}
+            onInputChange={(event, newInputValue) => {
+              setInputValue(newInputValue);
+            }}
+            fullWidth
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Search for Universities..."
+                variant="outlined"
+                sx={{ width: "450px" }}
+              />
+            )}
+          />
+          </Box>
+          
         </Grid>
         <Grid
           item
@@ -223,7 +228,7 @@ export const ReviewPage: React.FC = () => {
             justifyContent: "center",
             alignItems: "center",
             display: "flex",
-            marginBottom: "20px",
+            paddingBottom: 2,
           }}
         >
           <Button variant="contained" color="inherit" onClick={handleSubmit}>

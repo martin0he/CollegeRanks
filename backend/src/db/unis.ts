@@ -10,7 +10,6 @@ export const UniModel = mongoose.model("Uni", UniSchema);
 
 export const getUnis = () => UniModel.find(); //works
 export const getUniById = (id: string) => UniModel.findById(id); //works
-
 export const getUniByName = async (name: string) => {
   try {
     const regex = new RegExp(name, "i");
@@ -27,5 +26,5 @@ export const updateUniById = (id: string, rating: Number) =>
   UniModel.findByIdAndUpdate(
     id,
     { $push: { rating: rating } },
-    { new: true }                  // Set to true to return the modified document rather than the original
-  ); 
+    { new: true } // Set to true to return the modified document rather than the original
+  );
