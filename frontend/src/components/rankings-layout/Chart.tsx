@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import ChartsEmbedSDK, { Chart } from "@mongodb-js/charts-embed-dom";
-import { Box, Typography } from "@mui/material";
+
 
 const sdk = new ChartsEmbedSDK({
   baseUrl: "https://charts.mongodb.com/charts-cr-osisi",
   showAttribution: false,
-  
 });
 
 const uniChart: Chart = sdk.createChart({
@@ -15,34 +14,16 @@ const uniChart: Chart = sdk.createChart({
   maxDataAge: 120, //refresh rate in seconds
   renderingSpec: {
     version: 1,
-    
-
-  }
+  },
 });
-
-
 
 const ChartComponent: React.FC = () => {
   useEffect(() => {
     uniChart.render(document.getElementById("chart-data")!);
     // .catch(() => window.alert("Chart failed to initialise"));
-    
   }, []);
 
-  
-
-  return (
-    <Box
-      py={4}
-      px={3}
-    >
-      <Typography variant="h4" fontWeight="bold">
-        University Rankings
-      </Typography>
-      
-      <div id="chart-data" style={{ height: 500 }}></div>
-    </Box>
-  );
+  return <div id="chart-data" style={{ height: 500 }}></div>;
 };
 
 export default ChartComponent;
