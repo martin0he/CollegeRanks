@@ -2,7 +2,17 @@ import mongoose from "mongoose";
 
 const UniSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  rating: { type: [Number], required: true },
+  rating: {
+    weightedAverageRating: { type: [Number], required: true },
+    Academics: { type: [Number], required: true },
+    Food: { type: [Number], required: true },
+    Dorms: { type: [Number], required: true },
+    Social: { type: [Number], required: true },
+    Location: { type: [Number], required: true },
+    Opportunities: { type: [Number], required: true },
+    Clubs: { type: [Number], required: true },
+    Safety: { type: [Number], required: true },
+  },
   country: { type: String, required: false },
 });
 
@@ -22,9 +32,10 @@ export const getUniByName = async (name: string) => {
     throw error;
   }
 };
-export const updateUniById = (id: string, rating: Number) =>
-  UniModel.findByIdAndUpdate(
+
+export const updateUniById = async (id: string, ratings: Record<string, number>) => {
+  const updatedUniversity = await UniModel.findByIdAndUpdate(
     id,
-    { $push: { rating: rating } },
-    { new: true } // Set to true to return the modified document rather than the original
-  );
+    { $push: { ...Object.entries(ratings).reduce((acc, [metric, value]) => ({ ...acc, [`rating.${metric}`]: value }), {}) } },
+    { new: true }
+  )};

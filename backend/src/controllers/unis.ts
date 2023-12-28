@@ -1,6 +1,12 @@
 import express from "express";
 
-import { getUnis, getUniById, getUniByName, updateUniById } from "../db/unis";
+import {
+  getUnis,
+  getUniById,
+  getUniByName,
+  updateUniById,
+  UniModel,
+} from "../db/unis";
 
 //works
 export const getAllUniNames = async (
@@ -65,22 +71,17 @@ export const getUniID = async (req: express.Request, res: express.Response) => {
   }
 };
 
-//works
 export const updateUni = async (
   req: express.Request,
   res: express.Response
 ) => {
   try {
     const { id } = req.params;
-    const { rating } = req.body;
+    const { ratings } = req.body;
 
-    if (!rating) {
-      return res.sendStatus(400);
-    }
+    const updatedUniversity = await updateUniById(id, ratings);
 
-    const updatedUni = await updateUniById(id, rating);
-
-    return res.status(200).json(updatedUni).end();
+    return res.status(200).json(updatedUniversity);
   } catch (error) {
     console.log(error);
     return res.sendStatus(400);

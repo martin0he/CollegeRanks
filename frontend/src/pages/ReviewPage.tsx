@@ -11,7 +11,6 @@ import React, { useEffect, useState } from "react";
 
 import axios from "axios";
 
-
 export const ReviewPage: React.FC = () => {
   const metrics = [
     "Academics",
@@ -119,7 +118,7 @@ export const ReviewPage: React.FC = () => {
           //works, but receives wrong input from .get
           `http://localhost:8080/unis/${selectedUni._id}`,
           {
-            rating: calculateWeightedAverage(),
+            ratings: sliderValues,
           }
         );
 
@@ -194,33 +193,32 @@ export const ReviewPage: React.FC = () => {
             justifyContent: "center",
             alignItems: "center",
             display: "flex",
-            paddingBottom: 2
+            paddingBottom: 2,
           }}
         >
           <Box>
-          <Autocomplete
-            options={universities}
-            getOptionLabel={(universities) => universities} // Adjust based on the structure of your university objects
-            value={selectedUniversity}
-            onChange={(event, newValue) => {
-              setSelectedUniversity(newValue);
-            }}
-            inputValue={inputValue}
-            onInputChange={(event, newInputValue) => {
-              setInputValue(newInputValue);
-            }}
-            fullWidth
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Search for Universities..."
-                variant="outlined"
-                sx={{ width: "450px" }}
-              />
-            )}
-          />
+            <Autocomplete
+              options={universities}
+              getOptionLabel={(universities) => universities} // Adjust based on the structure of your university objects
+              value={selectedUniversity}
+              onChange={(event, newValue) => {
+                setSelectedUniversity(newValue);
+              }}
+              inputValue={inputValue}
+              onInputChange={(event, newInputValue) => {
+                setInputValue(newInputValue);
+              }}
+              fullWidth
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Search for Universities..."
+                  variant="outlined"
+                  sx={{ width: "450px" }}
+                />
+              )}
+            />
           </Box>
-          
         </Grid>
         <Grid
           item
