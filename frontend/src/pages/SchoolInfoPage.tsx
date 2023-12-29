@@ -26,6 +26,7 @@ export const SchoolInfoPage: React.FC = () => {
         setUniversities(response.data);
       } catch (error) {
         console.error("Error fetching universities:", error);
+        
       }
     };
 
@@ -55,6 +56,7 @@ export const SchoolInfoPage: React.FC = () => {
 
         // Update the ratings on the server
       } else {
+        setError(error);
         console.error("University not found");
       }
     } catch (error) {
@@ -86,7 +88,7 @@ export const SchoolInfoPage: React.FC = () => {
               }}
               inputValue={inputValue}
               onInputChange={(event, newInputValue) => {
-                setInputValue(newInputValue);
+                setInputValue(newInputValue); 
               }}
               fullWidth
               renderInput={(params) => (

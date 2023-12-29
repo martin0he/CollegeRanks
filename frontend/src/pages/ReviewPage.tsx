@@ -234,7 +234,7 @@ export const ReviewPage: React.FC = () => {
             justifyContent: "center",
             alignItems: "center",
             display: "flex",
-            paddingBottom: 2,
+            paddingBottom: 4,
           }}
         >
           <Button variant="contained" color="inherit" onClick={handleSubmit}>
