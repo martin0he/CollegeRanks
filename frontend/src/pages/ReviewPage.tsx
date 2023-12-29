@@ -5,6 +5,7 @@ import {
   Grid,
   Slider,
   TextField,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -22,6 +23,23 @@ export const ReviewPage: React.FC = () => {
     "Clubs",
     "Safety",
   ];
+
+  const descriptions: Record<string, string> = {
+    Academics:
+      "Refers to the quality and academic prowess of the school and its faculty.",
+    Food: "Refers to the quality, variability, and inclusiveness of the dining hall cuisine.",
+    Dorms:
+      "Refers to the structure, cleanliness, modernity, habitability and overall living conditions of the school dorms.",
+    Social:
+      "Refers to the ability to socialize on campus, as well as student groups that promote interactions within the student body.",
+    Location:
+      "Refers to the ease of access to the campus, proximity to public transportation and/or areas of commerce.",
+    Opportunities:
+      "Refers to professional, personal, and/or academic opportunities made available to students of all levels.",
+    Clubs: "Refers to the quantity and quality of student-led organizations.",
+    Safety:
+      "Refers to the level of safety in/around campus and its amount of police presence.",
+  };
 
   const weights: Record<string, number> = {
     Academics: 0.16,
@@ -112,11 +130,13 @@ export const ReviewPage: React.FC = () => {
 
       if (response.data) {
         const selectedUni = response.data; // Assuming the API response structure
-        
-        const updateRating = await axios.patch(`http://localhost:8080/uni/rating/${selectedUni._id}`,
-        {
-          overallRating: calculateWeightedAverage(),
-        });
+
+        const updateRating = await axios.patch(
+          `http://localhost:8080/uni/rating/${selectedUni._id}`,
+          {
+            overallRating: calculateWeightedAverage(),
+          }
+        );
 
         console.log(updateRating.data);
 
@@ -129,7 +149,6 @@ export const ReviewPage: React.FC = () => {
           }
         );
 
-        
         // Log the updated university (replace with your actual update logic)
         console.log("Updated University:", updateResponse.data);
       } else {
@@ -151,9 +170,15 @@ export const ReviewPage: React.FC = () => {
             <Grid container direction="row" spacing={2}>
               {Object.keys(weights).map((metric) => (
                 <Grid item xs={6} key={metric}>
-                  <Typography variant="subtitle2" gutterBottom>
-                    {metric}
-                  </Typography>
+                  <Tooltip
+                    title={descriptions[metric]}
+                    arrow
+                    placement="top-start"
+                  >
+                    <Typography variant="subtitle2" gutterBottom>
+                      {metric}
+                    </Typography>
+                  </Tooltip>
 
                   <Slider
                     size="small"
@@ -237,7 +262,12 @@ export const ReviewPage: React.FC = () => {
             paddingBottom: 4,
           }}
         >
-          <Button variant="contained" color="inherit" onClick={handleSubmit} sx={{ bgcolor: "inherit", "&:hover": { bgcolor: "#f5f4f3" },}}>
+          <Button
+            variant="contained"
+            color="inherit"
+            onClick={handleSubmit}
+            sx={{ bgcolor: "inherit", "&:hover": { bgcolor: "#f5f4f3" } }}
+          >
             Submit
           </Button>
         </Grid>
