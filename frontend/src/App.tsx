@@ -7,6 +7,7 @@ import { RankingsPage } from "./pages/RankingsPage";
 import { ReviewPage } from "./pages/ReviewPage";
 import { SignupPage } from "./pages/SignupPage";
 import { SectionIdEnum } from "./types/section-id/section-id";
+import { SchoolInfoPage } from "./pages/SchoolInfoPage";
 
 const sections = [
   {
@@ -22,6 +23,10 @@ const sections = [
     component: <ReviewPage />,
   },
   {
+    sectionId: SectionIdEnum.schoolinfo,
+    component: <SchoolInfoPage />,
+  },
+  {
     sectionId: SectionIdEnum.login,
     component: <LoginPage />,
   },
@@ -29,6 +34,7 @@ const sections = [
     sectionId: SectionIdEnum.signup,
     component: <SignupPage />,
   },
+  
 ];
 
 export const App: React.FC = () => {

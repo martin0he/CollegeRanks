@@ -103,3 +103,29 @@ export const updateUniRating = async (
     return res.sendStatus(400);
   }
 };
+
+
+export const getUniStats = async (req: express.Request, res: express.Response) => {
+  try {
+    const { id } = req.params;
+    // Find the university by ID
+    const uni = await UniModel.findById(id);
+
+    if (!uni) {
+      return res.status(404).json({ error: 'University not found' });
+    }
+
+    // Calculate average for each rating subfield
+    const averageRatings: Record<string, string> = {};
+    for (const [metric, values] of Object.entries(uni.rating)) {
+      const sum = values.reduce((acc, value) => acc + value, 0);
+      const average = (sum / values.length || 0).toFixed(2); // Handle division by zero
+      averageRatings[metric] = average;
+    }
+
+    return res.status(200).json(averageRatings);
+  } catch (error) {
+    console.error('Error calculating average ratings:', error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
+};

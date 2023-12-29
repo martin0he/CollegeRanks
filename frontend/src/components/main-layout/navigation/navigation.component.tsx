@@ -34,6 +34,10 @@ const navigationItems = [
     to: SectionIdEnum.review,
   },
   {
+    text: "School Info",
+    to: SectionIdEnum.schoolinfo,
+  },
+  {
     text: "Login",
     to: SectionIdEnum.login,
   },
