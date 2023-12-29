@@ -100,7 +100,7 @@ export const SchoolInfoPage: React.FC = () => {
                 />
               )}
             />
-            <Button variant="contained" color="inherit" onClick={handleSubmit}>
+            <Button variant="contained" color="inherit" onClick={handleSubmit} sx={{ bgcolor: "inherit", "&:hover": { bgcolor: "#f5f4f3" }, }}>
               Check
             </Button>
           </Box>

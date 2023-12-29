@@ -237,7 +237,7 @@ export const ReviewPage: React.FC = () => {
             paddingBottom: 4,
           }}
         >
-          <Button variant="contained" color="inherit" onClick={handleSubmit}>
+          <Button variant="contained" color="inherit" onClick={handleSubmit} sx={{ bgcolor: "inherit", "&:hover": { bgcolor: "#f5f4f3" },}}>
             Submit
           </Button>
         </Grid>

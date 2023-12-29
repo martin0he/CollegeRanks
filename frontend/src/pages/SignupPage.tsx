@@ -54,7 +54,7 @@ export const SignupPage: React.FC = () => {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "#880C79" }}>
+          <Avatar sx={{ m: 1, bgcolor: "#e1d6ba" }}>
             <LockOutlined />
           </Avatar>
           <Typography variant="h5">Register</Typography>
@@ -105,7 +105,7 @@ export const SignupPage: React.FC = () => {
                 mb: 2,
                 color: "inherit",
                 bgcolor: "inherit",
-                "&:hover": { bgcolor: "#e1d6ba" },
+                "&:hover": { bgcolor: "#f5f4f3" },
               }}
               onClick={handleRegister}
             >
