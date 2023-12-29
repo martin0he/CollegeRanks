@@ -33,9 +33,28 @@ export const getUniByName = async (name: string) => {
   }
 };
 
-export const updateUniById = async (id: string, ratings: Record<string, number>) => {
+export const updateUniById = async (
+  id: string,
+  ratings: Record<string, number>
+) => {
   const updatedUniversity = await UniModel.findByIdAndUpdate(
     id,
-    { $push: { ...Object.entries(ratings).reduce((acc, [metric, value]) => ({ ...acc, [`rating.${metric}`]: value }), {}) } },
+    {
+      $push: {
+        ...Object.entries(ratings).reduce(
+          (acc, [metric, value]) => ({ ...acc, [`rating.${metric}`]: value }),
+          {}
+        ),
+      },
+    },
     { new: true }
-  )};
+  ); 
+};
+
+export const updateUniOverall = (id: string, rating: Number) =>
+  UniModel.findByIdAndUpdate(
+    id,
+    { $push: { overallRating: rating } },
+    { new: true } // Set to true to return the modified document rather than the original
+  );
+ 

@@ -6,6 +6,7 @@ import {
   getUniByName,
   updateUniById,
   UniModel,
+  updateUniOverall,
 } from "../db/unis";
 
 //works
@@ -134,16 +135,17 @@ export const avg = async (req: express.Request, res: express.Response) => {
   }
 };
 
-export const updateUniRating = async (req: express.Request, res: express.Response) => {
+export const updateUniRating = async (
+  req: express.Request,
+  res: express.Response
+) => {
   try {
     const { id } = req.params;
     const { overallRating } = req.body;
-    const uni = await getUniById(id);
-    uni.overallRating = overallRating;
-    await uni.save();
+    const uni = await updateUniOverall(id, overallRating);
     return res.status(200).json(uni).end();
   } catch (error) {
     console.log(error);
     return res.sendStatus(400);
   }
-}
+};

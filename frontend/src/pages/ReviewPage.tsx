@@ -112,13 +112,13 @@ export const ReviewPage: React.FC = () => {
 
       if (response.data) {
         const selectedUni = response.data; // Assuming the API response structure
-       
+        //const rating = await axios.post(`http://localhost:8080/uni/rating/${selectedUni._id}`);
         const updateRating = await axios.patch(`http://localhost:8080/uni/rating/${selectedUni._id}`,
         {
           overallRating: calculateWeightedAverage(),
         });
 
-        console.log("Uni: ", updateRating.data);
+        
 
         // Update the ratings on the server
         const updateResponse = await axios.patch(

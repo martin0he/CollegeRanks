@@ -13,6 +13,6 @@ export default (router: express.Router) => {
     router.get('/unis', getAllUnis); //works
     router.get('/uni/id/:id', getUniID);  //works
     router.patch('/uni/ratings/:id', updateUni);  //works
-    router.get('/uni/rating/:id', avg);  
+    router.post('/uni/rating/:id', avg);  
     router.patch('/uni/rating/:id', updateUniRating);
 };
