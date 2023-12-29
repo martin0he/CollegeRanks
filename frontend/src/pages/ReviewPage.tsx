@@ -112,16 +112,24 @@ export const ReviewPage: React.FC = () => {
 
       if (response.data) {
         const selectedUni = response.data; // Assuming the API response structure
+       
+        const updateRating = await axios.patch(`http://localhost:8080/uni/rating/${selectedUni._id}`,
+        {
+          overallRating: calculateWeightedAverage(),
+        });
 
-        // Update the rating on the server
+        console.log("Uni: ", updateRating.data);
+
+        // Update the ratings on the server
         const updateResponse = await axios.patch(
           //works, but receives wrong input from .get
-          `http://localhost:8080/unis/${selectedUni._id}`,
+          `http://localhost:8080/uni/ratings/${selectedUni._id}`,
           {
             ratings: sliderValues,
           }
         );
 
+        
         // Log the updated university (replace with your actual update logic)
         console.log("Updated University:", updateResponse.data);
       } else {

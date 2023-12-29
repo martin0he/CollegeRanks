@@ -1,7 +1,7 @@
 import express from "express";
 
 
-import { getAllUniNames, getUni, getUniID, updateUni, getAllUnis } from "../controllers/unis";
+import { getAllUniNames, getUni, getUniID, updateUni, getAllUnis, avg, updateUniRating } from "../controllers/unis";
 
 
 
@@ -12,5 +12,7 @@ export default (router: express.Router) => {
     router.post('/uni', getUni);   //works
     router.get('/unis', getAllUnis); //works
     router.get('/uni/id/:id', getUniID);  //works
-    router.patch('/unis/:id', updateUni);  //works
+    router.patch('/uni/ratings/:id', updateUni);  //works
+    router.get('/uni/rating/:id', avg);  
+    router.patch('/uni/rating/:id', updateUniRating);
 };

@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 const UniSchema = new mongoose.Schema({
   name: { type: String, required: true },
   rating: {
-    weightedAverageRating: { type: [Number], required: true },
     Academics: { type: [Number], required: true },
     Food: { type: [Number], required: true },
     Dorms: { type: [Number], required: true },
@@ -14,6 +13,7 @@ const UniSchema = new mongoose.Schema({
     Safety: { type: [Number], required: true },
   },
   country: { type: String, required: false },
+  overallRating: { type: [Number], required: true },
 });
 
 export const UniModel = mongoose.model("Uni", UniSchema);
