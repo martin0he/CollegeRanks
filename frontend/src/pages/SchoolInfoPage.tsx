@@ -11,6 +11,7 @@ import { useState, useEffect } from "react";
 
 export const SchoolInfoPage: React.FC = () => {
   const [uniStats, setUniStats] = useState({});
+  const [uniOverall, setUniOverall] = useState<number | null>(null);
   const [error, setError] = useState("");
 
   const [universities, setUniversities] = useState([]);
@@ -44,8 +45,12 @@ export const SchoolInfoPage: React.FC = () => {
         const stats = await axios.get(
           `http://localhost:8080/uni/stats/${selectedUni._id}`
         );
-
+        const overall = await axios.get(
+          `http://localhost:8080/uni/overall/${selectedUni._id}`
+        );
+        setUniOverall(overall.data?.average);
         setUniStats(stats.data);
+        console.log(overall.data);
         console.log(stats.data);
 
         // Update the ratings on the server
@@ -106,7 +111,7 @@ export const SchoolInfoPage: React.FC = () => {
           alignItems: "center",
           display: "flex",
         }}
-        py={1}
+        paddingBottom={4}
         px={5}
       >
         <Box>
@@ -131,6 +136,11 @@ export const SchoolInfoPage: React.FC = () => {
                 </Grid>
               ))
             )}
+            <Grid item>
+              <Typography fontSize="1.1em" fontWeight={500}>{`Overall Rating: ${
+                uniOverall !== null ? uniOverall.toFixed(2) : "N/A"
+              }`}</Typography>
+            </Grid>
           </Grid>
         </Box>
       </Grid>

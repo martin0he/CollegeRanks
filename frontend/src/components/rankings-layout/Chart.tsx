@@ -511,7 +511,7 @@ const ChartComponent: React.FC = () => {
                 {...params}
                 label="Filter by country"
                 variant="outlined"
-                sx={{ width: "450px" }}
+                sx={{ width: "230px" }}
               />
             )}
           />

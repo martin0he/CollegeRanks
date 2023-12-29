@@ -104,15 +104,17 @@ export const updateUniRating = async (
   }
 };
 
-
-export const getUniStats = async (req: express.Request, res: express.Response) => {
+export const getUniStats = async (
+  req: express.Request,
+  res: express.Response
+) => {
   try {
     const { id } = req.params;
     // Find the university by ID
     const uni = await UniModel.findById(id);
 
     if (!uni) {
-      return res.status(404).json({ error: 'University not found' });
+      return res.status(404).json({ error: "University not found" });
     }
 
     // Calculate average for each rating subfield
@@ -125,7 +127,33 @@ export const getUniStats = async (req: express.Request, res: express.Response) =
 
     return res.status(200).json(averageRatings);
   } catch (error) {
-    console.error('Error calculating average ratings:', error);
+    console.error("Error calculating average ratings:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+export const getUniOverall = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  try {
+    const { id } = req.params;
+    
+    // Find the university by ID
+    const uni = await UniModel.findById(id);
+
+    if (!uni) {
+      return res.status(404).json({ error: 'University not found' });
+    }
+
+    // Calculate average of overallRating
+    const overallRating = uni.overallRating || [];
+    const sum = overallRating.reduce((acc, value) => acc + value, 0);
+    const average = (sum / overallRating.length) || 0;
+
+    return res.status(200).json({ average });
+  } catch (error) {
+    console.error('Error calculating average overall rating:', error);
     return res.status(500).json({ error: 'Internal Server Error' });
   }
 };
