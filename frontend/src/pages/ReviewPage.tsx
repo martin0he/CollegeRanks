@@ -111,7 +111,7 @@ export const ReviewPage: React.FC = () => {
     // Fetch the list of universities from your API endpoint
     const fetchUniversities = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/uninames"); // Replace with your actual API endpoint
+        const response = await axios.get("http://localhost:8080/unis/names"); // Replace with your actual API endpoint
         setUniversities(response.data);
       } catch (error) {
         console.error("Error fetching universities:", error);
@@ -132,7 +132,7 @@ export const ReviewPage: React.FC = () => {
         const selectedUni = response.data; // Assuming the API response structure
 
         const updateRating = await axios.patch(
-          `http://localhost:8080/uni/rating/${selectedUni._id}`,
+          `http://localhost:8080/uni/overall/${selectedUni._id}`,
           {
             overallRating: calculateWeightedAverage(),
           }
@@ -143,7 +143,7 @@ export const ReviewPage: React.FC = () => {
         // Update the ratings on the server
         const updateResponse = await axios.patch(
           //works, but receives wrong input from .get
-          `http://localhost:8080/uni/ratings/${selectedUni._id}`,
+          `http://localhost:8080/uni/metrics/${selectedUni._id}`,
           {
             ratings: sliderValues,
           }

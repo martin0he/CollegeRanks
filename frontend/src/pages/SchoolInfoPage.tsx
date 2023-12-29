@@ -22,7 +22,7 @@ export const SchoolInfoPage: React.FC = () => {
     // Fetch the list of universities from your API endpoint
     const fetchUniversities = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/uninames"); // Replace with your actual API endpoint
+        const response = await axios.get("http://localhost:8080/unis/names"); // Replace with your actual API endpoint
         setUniversities(response.data);
       } catch (error) {
         console.error("Error fetching universities:", error);
@@ -44,7 +44,7 @@ export const SchoolInfoPage: React.FC = () => {
         const selectedUni = response.data; // Assuming the API response structure
 
         const stats = await axios.get(
-          `http://localhost:8080/uni/stats/${selectedUni._id}`
+          `http://localhost:8080/uni/metrics/${selectedUni._id}`
         );
         const overall = await axios.get(
           `http://localhost:8080/uni/overall/${selectedUni._id}`

@@ -8,12 +8,12 @@ import { getAllUniNames, getUni, getUniID, updateUni, getAllUnis, updateUniRatin
 
 export default (router: express.Router) => {
     router.use(express.json());
-    router.get('/uninames', getAllUniNames);  //works
-    router.post('/uni', getUni);   //works
-    router.get('/unis', getAllUnis); //works
-    router.get('/uni/id/:id', getUniID);  //works
-    router.patch('/uni/ratings/:id', updateUni);  //works
-    router.patch('/uni/rating/:id', updateUniRating);
-    router.get('/uni/stats/:id', getUniStats);
+    router.get('/unis/names', getAllUniNames);  
+    router.post('/uni', getUni);   
+    router.get('/unis', getAllUnis); 
+    router.get('/uni/id/:id', getUniID);  
+    router.patch('/uni/metrics/:id', updateUni);  
+    router.patch('/uni/overall/:id', updateUniRating);
+    router.get('/uni/metrics/:id', getUniStats);
     router.get('/uni/overall/:id', getUniOverall);
 }; 
