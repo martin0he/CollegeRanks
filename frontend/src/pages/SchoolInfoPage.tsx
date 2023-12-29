@@ -117,14 +117,14 @@ export const SchoolInfoPage: React.FC = () => {
         px={5}
       >
         <Box>
-          <Grid container fontSize="20px">
+          <Grid container fontSize="16px" sx={{ justifyContent: "center", alignItems: "center", display: "flex" }}>
             {error ? (
               <Typography variant="subtitle1" color="error">
                 {error}
               </Typography>
             ) : (
               Object.entries(uniStats).map(([metric, average]) => (
-                <Grid container spacing={12}>
+                <Grid container spacing={12} sx={{ justifyContent: "center", alignItems: "center", display: "flex" }}>
                   <Grid item key={metric} xs={4} sm={5} md={6}>
                     <Typography variant="subtitle1" fontSize="1.1em">
                       {`${metric}: `}

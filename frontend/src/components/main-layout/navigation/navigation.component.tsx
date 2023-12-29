@@ -76,7 +76,7 @@ export const Navigation: React.FC<NavigationProps> = ({ isSmall }) => {
           size="large"
           fullWidth={isSmall}
           onClick={onCloseHandler}
-          sx={{ color: '#880C79' }}
+          sx={{ color: "#880C79" }}
         >
           {text}
         </Button>
@@ -86,12 +86,12 @@ export const Navigation: React.FC<NavigationProps> = ({ isSmall }) => {
 
   return (
     <>
-      <Hidden smDown>
+      <Hidden mdDown>
         <Box display="flex" gap={2}>
           {mappedItems}
         </Box>
       </Hidden>
-      <Hidden smUp>
+      <Hidden mdUp>
         <IconButton color="inherit" onClick={onOpenHandler}>
           <Menu />
         </IconButton>
@@ -120,7 +120,17 @@ export const Navigation: React.FC<NavigationProps> = ({ isSmall }) => {
               </IconButton>
             </Toolbar>
           </AppBar>
-          <Box display="flex" flexDirection="column" py={3} width="100%">
+          <Box
+            display="flex"
+            flexDirection="column"
+            py={3}
+            width="100%"
+            sx={{
+              justifyContent: "center",
+              alignItems: "center",
+              display: "flex",
+            }}
+          >
             {mappedItems}
           </Box>
         </Dialog>
