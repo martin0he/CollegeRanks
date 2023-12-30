@@ -1,4 +1,3 @@
-import { LockOutlined } from "@mui/icons-material";
 import {
   Container,
   CssBaseline,
@@ -11,6 +10,8 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import AnchorLink from "react-anchor-link-smooth-scroll";
+import LoginIcon from '@mui/icons-material/Login';
+
 
 export const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -56,12 +57,12 @@ export const LoginPage: React.FC = () => {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "#e1d6ba" }}>
-            <LockOutlined />
+            <LoginIcon />
           </Avatar>
           <Typography variant="h5" sx={{ color: "inherit" }}>
             Login
           </Typography>
-          <Box sx={{ mt: 1 }}>
+          <Box sx={{ mt: 1 }}> 
             <TextField
               margin="normal"
               required

@@ -8,7 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { LockOutlined } from "@mui/icons-material";
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { useState } from "react";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 
@@ -56,7 +56,7 @@ export const SignupPage: React.FC = () => {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "#e1d6ba" }}>
-            <LockOutlined />
+            <PersonAddIcon />
           </Avatar>
           <Typography variant="h5">Register</Typography>
           <Box sx={{ mt: 3 }}>
