@@ -51,3 +51,4 @@ export const isAuthenticated = async (
     return res.sendStatus(400);
   }
 };
+

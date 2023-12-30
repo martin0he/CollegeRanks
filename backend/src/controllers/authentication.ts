@@ -32,6 +32,8 @@ export const login = async (req: express.Request, res: express.Response) => {
     res.cookie("CR-AUTH", user.authentication.sessionToken, {
       domain: "localhost",
       path: "/",
+      sameSite: 'none',
+      secure: true
     });
 
     return res.status(200).json(user).end();

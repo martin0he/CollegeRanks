@@ -12,6 +12,8 @@ import React, { useEffect, useState } from "react";
 
 import axios from "axios";
 
+
+
 export const ReviewPage: React.FC = () => {
   const metrics = [
     "Academics",
@@ -103,9 +105,15 @@ export const ReviewPage: React.FC = () => {
     return weightSum !== 0 ? sum / weightSum : 0;
   };
 
+
   const [universities, setUniversities] = useState([]);
   const [selectedUniversity, setSelectedUniversity] = useState(null);
   const [inputValue, setInputValue] = useState("");
+
+  
+
+  
+
 
   useEffect(() => {
     // Fetch the list of universities from your API endpoint
@@ -126,6 +134,7 @@ export const ReviewPage: React.FC = () => {
       // Call the backend API to get the university by name
       const response = await axios.post("http://localhost:8080/uni", {
         name: selectedUniversity,
+        
       });
 
       if (response.data) {
@@ -135,18 +144,21 @@ export const ReviewPage: React.FC = () => {
           `http://localhost:8080/uni/overall/${selectedUni._id}`,
           {
             overallRating: calculateWeightedAverage(),
-          }
+          },
+          { withCredentials: true }
         );
 
         console.log(updateRating.data);
 
+        
         // Update the ratings on the server
         const updateResponse = await axios.patch(
           //works, but receives wrong input from .get
           `http://localhost:8080/uni/metrics/${selectedUni._id}`,
           {
             ratings: sliderValues,
-          }
+          },
+          { withCredentials: true }
         );
 
         // Log the updated university (replace with your actual update logic)
@@ -266,7 +278,7 @@ export const ReviewPage: React.FC = () => {
             variant="contained"
             color="inherit"
             onClick={handleSubmit}
-            sx={{ bgcolor: "inherit", "&:hover": { bgcolor: "#f5f4f3" } }}
+            sx={{ bgcolor: "inherit", "&:hover": { bgcolor: "#f5f4f3" }, cursor: "pointer" }}
           >
             Submit
           </Button>
