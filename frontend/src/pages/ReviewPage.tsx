@@ -12,8 +12,6 @@ import React, { useEffect, useState } from "react";
 
 import axios from "axios";
 
-
-
 export const ReviewPage: React.FC = () => {
   const metrics = [
     "Academics",
@@ -105,15 +103,10 @@ export const ReviewPage: React.FC = () => {
     return weightSum !== 0 ? sum / weightSum : 0;
   };
 
-
   const [universities, setUniversities] = useState([]);
   const [selectedUniversity, setSelectedUniversity] = useState(null);
   const [inputValue, setInputValue] = useState("");
-
-  
-
-  
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     // Fetch the list of universities from your API endpoint
@@ -129,15 +122,32 @@ export const ReviewPage: React.FC = () => {
     fetchUniversities();
   }, []);
 
+
+
+  useEffect(() => {
+    // Fetch the list of universities from your API endpoint
+    const verify = async () => {
+      try {
+        const verification = await axios.get("http://localhost:8080/verify", 
+        { withCredentials: true });
+        setIsLoggedIn(verification.data);
+      } catch (error) {
+        console.log("Could not verify:", error);
+      }
+    };
+
+    verify();
+  }, []); 
+
   const handleSubmit = async () => {
     try {
       // Call the backend API to get the university by name
       const response = await axios.post("http://localhost:8080/uni", {
         name: selectedUniversity,
-        
       });
 
       if (response.data) {
+        
         const selectedUni = response.data; // Assuming the API response structure
 
         const updateRating = await axios.patch(
@@ -150,7 +160,6 @@ export const ReviewPage: React.FC = () => {
 
         console.log(updateRating.data);
 
-        
         // Update the ratings on the server
         const updateResponse = await axios.patch(
           //works, but receives wrong input from .get
@@ -278,9 +287,14 @@ export const ReviewPage: React.FC = () => {
             variant="contained"
             color="inherit"
             onClick={handleSubmit}
-            sx={{ bgcolor: "inherit", "&:hover": { bgcolor: "#f5f4f3" }, cursor: "pointer" }}
+            sx={{
+              bgcolor: "inherit",
+              "&:hover": { bgcolor: "#f5f4f3" },
+              cursor: isLoggedIn ? "pointer" : "not-allowed",
+            }}
+            disabled={!isLoggedIn}
           >
-            Submit
+            {isLoggedIn ? "Submit" : "Login to Submit"}
           </Button>
         </Grid>
       </Grid>

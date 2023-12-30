@@ -41,6 +41,7 @@ export const LoginPage: React.FC = () => {
         // Authentication failed
         console.log("Login failed. Please check your credentials.");
       }
+      document.location.reload();
     } catch (error) {
       console.log("Error during login:", error);
     }

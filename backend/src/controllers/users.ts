@@ -1,7 +1,7 @@
 import express from "express";
 
 
-import { deleteUserById, getUserByEmail, getUserById, getUsers } from "../db/users";
+import { deleteUserById, getUserByEmail, getUserById, getUsers, getUserBySessionToken } from "../db/users";
 
 export const getAllUsers = async (req: express.Request, res: express.Response) => {
     try {
@@ -58,3 +58,24 @@ export const getUserEmail = async (req: express.Request, res: express.Response) 
         return res.sendStatus(400);
     }
 }
+
+
+export const verify = async (req: express.Request, res: express.Response) => {
+    try {
+    const sessionToken = req.cookies["CR-AUTH"];
+      if (!sessionToken) {
+        // No session token provided, return false
+        return res.status(400).json(false);
+      }
+  
+      const existingUser = await getUserBySessionToken(sessionToken);
+  
+      // Return true if a user is found, indicating successful authentication
+      return res.status(200).json(Boolean(existingUser));
+    } catch (error) {
+      // Log any errors that occur during the authentication process
+      console.log(error);
+      return false;
+    }
+  };
+  
