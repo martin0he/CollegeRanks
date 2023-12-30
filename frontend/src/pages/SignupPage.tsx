@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { LockOutlined } from "@mui/icons-material";
 import { useState } from "react";
+import AnchorLink from "react-anchor-link-smooth-scroll";
 
 export const SignupPage: React.FC = () => {
   const [name, setName] = useState("");
@@ -113,7 +114,9 @@ export const SignupPage: React.FC = () => {
             </Button>
             <Grid container justifyContent={"flex-end"}>
               <Grid item>
-                <a href="#login">Already have an account? Login Here</a>
+                <AnchorLink style={{ textDecoration: "none" }} href="#login">
+                  Already have an account? Login Here
+                </AnchorLink>
               </Grid>
             </Grid>
           </Box>

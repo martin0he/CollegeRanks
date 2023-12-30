@@ -10,10 +10,7 @@ import {
   Grid,
 } from "@mui/material";
 import { useState } from "react";
-
-
-
-
+import AnchorLink from "react-anchor-link-smooth-scroll";
 
 export const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -36,7 +33,6 @@ export const LoginPage: React.FC = () => {
       if (response.ok) {
         // Authentication successful, redirect or handle accordingly
         console.log("Login successful!");
-        
       } else {
         // Authentication failed
         console.log("Login failed. Please check your credentials.");
@@ -73,7 +69,6 @@ export const LoginPage: React.FC = () => {
               id="email"
               label="Email Address"
               name="email"
-              
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -108,7 +103,9 @@ export const LoginPage: React.FC = () => {
             </Button>
             <Grid container justifyContent={"flex-end"}>
               <Grid item>
-                <a href="#signup">Don't have an account? Register Here</a>
+                <AnchorLink style={{ textDecoration: "none" }} href="#signup">
+                  Don't have an account? Register Here
+                </AnchorLink>
               </Grid>
             </Grid>
           </Box>

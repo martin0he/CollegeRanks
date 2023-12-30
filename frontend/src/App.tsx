@@ -8,6 +8,7 @@ import { ReviewPage } from "./pages/ReviewPage";
 import { SignupPage } from "./pages/SignupPage";
 import { SectionIdEnum } from "./types/section-id/section-id";
 import { SchoolInfoPage } from "./pages/SchoolInfoPage";
+import { useEffect } from "react";
 
 const sections = [
   {
@@ -38,6 +39,10 @@ const sections = [
 ];
 
 export const App: React.FC = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    }, []);
+    
   return (
     <MainLayout>
       {sections.map(({ component, sectionId }) => {

@@ -69,9 +69,32 @@ export const verify = async (req: express.Request, res: express.Response) => {
       }
   
       const existingUser = await getUserBySessionToken(sessionToken);
-  
+      
       // Return true if a user is found, indicating successful authentication
       return res.status(200).json(Boolean(existingUser));
+    } catch (error) {
+      // Log any errors that occur during the authentication process
+      console.log(error);
+      return false;
+    }
+  };
+
+  export const getUsername = async (req: express.Request, res: express.Response) => {
+    try {
+    const sessionToken = req.cookies["CR-AUTH"];
+      if (!sessionToken) {
+        // No session token provided, return false
+        return res.status(400).json("GUEST");
+      }
+  
+      const existingUser = await getUserBySessionToken(sessionToken);
+      if(!existingUser) {
+        return res.status(400).json("GUEST");
+      }
+      
+      const username = existingUser.username;
+      // Return true if a user is found, indicating successful authentication
+      return res.status(200).json(username);
     } catch (error) {
       // Log any errors that occur during the authentication process
       console.log(error);

@@ -13,6 +13,7 @@ import AnchorLink from "react-anchor-link-smooth-scroll";
 import { SectionIdEnum } from "../../types/section-id/section-id";
 import { Navigation } from "./navigation/navigation.component";
 import { Masthead } from "./masthead-layout.component";
+import { UserStatus } from "./user.component";
 
 export type MainLayoutProps = {
   children: React.ReactNode;
@@ -53,7 +54,9 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
             </AnchorLink>
           </Box>
           <Navigation isSmall={isSmall} />
+          <UserStatus />
         </Toolbar>
+        
       </AppBar>
       <Box>
         <Toolbar />
