@@ -194,6 +194,7 @@ export const ReviewPage: React.FC = () => {
                   <Tooltip
                     title={descriptions[metric]}
                     arrow
+                    sx={{ width: "0%" }}
                     placement="top-start"
                   >
                     <Typography variant="subtitle2" gutterBottom>
@@ -203,13 +204,13 @@ export const ReviewPage: React.FC = () => {
 
                   <Slider
                     size="small"
-                    valueLabelDisplay="auto"
+                    valueLabelDisplay="off"
                     aria-label="pretto slider"
                     value={sliderValues[metric]}
                     onChange={handleSliderChange(metric)}
                     onBlur={handleBlur(metric)}
-                    sx={{ color: "inherit" }}
-                  />
+                    
+                   />
                   <TextField
                     size="small"
                     id={`${metric}-input`}
