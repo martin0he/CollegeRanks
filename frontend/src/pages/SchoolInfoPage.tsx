@@ -69,7 +69,11 @@ export const SchoolInfoPage: React.FC = () => {
       <Typography variant="h4" px={3} mt={3}>
         <b>Check Your School</b>
       </Typography>
-      <Grid container>
+      <Grid container direction="column" sx={{
+              justifyContent: "center",
+              alignItems: "center",
+              display: "flex",
+            }}>
         <Grid item px={3}>
           <Box
             sx={{
@@ -105,8 +109,7 @@ export const SchoolInfoPage: React.FC = () => {
             </Button>
           </Box>
         </Grid>
-      </Grid>
-      <Grid
+        <Grid
         item
         sx={{
           justifyContent: "center",
@@ -146,6 +149,8 @@ export const SchoolInfoPage: React.FC = () => {
           </Grid>
         </Box>
       </Grid>
+      </Grid>
+      
     </Box>
   );
 };
