@@ -45,7 +45,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                     width: "fit-content",
                     fontSize: "1.75em",
                     fontWeight: "600",
-                    color: "#880C79"
+                    color: "#880C79",
                   }}
                 >
                   CollegeRanks
@@ -56,7 +56,6 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
           <Navigation isSmall={isSmall} />
           <UserStatus />
         </Toolbar>
-        
       </AppBar>
       <Box>
         <Toolbar />

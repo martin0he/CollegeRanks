@@ -35,14 +35,13 @@ const sections = [
     sectionId: SectionIdEnum.signup,
     component: <SignupPage />,
   },
-  
 ];
 
 export const App: React.FC = () => {
   useEffect(() => {
-    window.scrollTo(0, 0);
-    }, []);
-    
+    window.scrollTo(0, 0); //every refresh starts the page at the very top-left
+  }, []);
+
   return (
     <MainLayout>
       {sections.map(({ component, sectionId }) => {

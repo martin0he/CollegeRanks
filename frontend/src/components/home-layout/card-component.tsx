@@ -1,10 +1,10 @@
-import React from 'react';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import { Icon } from '@mui/material';
+import React from "react";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import { Icon } from "@mui/material";
 
 interface CustomCardProps {
   title: string;
@@ -13,7 +13,6 @@ interface CustomCardProps {
 }
 
 const CustomCard: React.FC<CustomCardProps> = ({ title, icon, body }) => {
-
   return (
     <Card sx={{ borderRadius: "20px", height: "100%" }}>
       <CardHeader

@@ -10,8 +10,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import AnchorLink from "react-anchor-link-smooth-scroll";
-import LoginIcon from '@mui/icons-material/Login';
-
+import LoginIcon from "@mui/icons-material/Login";
 
 export const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -19,6 +18,7 @@ export const LoginPage: React.FC = () => {
 
   const handleLogin = async () => {
     try {
+      //authenticate user logging in
       const response = await fetch("http://localhost:8080/auth/login", {
         method: "POST",
         credentials: "include",
@@ -32,13 +32,13 @@ export const LoginPage: React.FC = () => {
       });
 
       if (response.ok) {
-        // Authentication successful, redirect or handle accordingly
+        // Authentication successful
         console.log("Login successful!");
       } else {
         // Authentication failed
         console.log("Login failed. Please check your credentials.");
       }
-      document.location.reload();
+      document.location.reload(); //reload when logging in
     } catch (error) {
       console.log("Error during login:", error);
     }
@@ -62,7 +62,7 @@ export const LoginPage: React.FC = () => {
           <Typography variant="h5" sx={{ color: "inherit" }}>
             Login
           </Typography>
-          <Box sx={{ mt: 1 }}> 
+          <Box sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required

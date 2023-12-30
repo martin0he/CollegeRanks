@@ -8,7 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { useState } from "react";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 
@@ -32,7 +32,7 @@ export const SignupPage: React.FC = () => {
       });
 
       if (response.ok) {
-        // Registration successful, handle accordingly
+        // Registration successful
         console.log("Registration successful!");
       } else {
         // Registration failed

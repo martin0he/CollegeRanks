@@ -16,10 +16,9 @@ const UniSchema = new mongoose.Schema({
   overallRating: { type: [Number], required: true },
 });
 
-export const UniModel = mongoose.model("Uni", UniSchema);
-
-export const getUnis = () => UniModel.find(); //works
-export const getUniById = (id: string) => UniModel.findById(id); //works
+export const UniModel = mongoose.model("Uni", UniSchema); //model for university entity
+export const getUnis = () => UniModel.find(); //returns all the uni entities
+export const getUniById = (id: string) => UniModel.findById(id); //returns a uni by its id
 export const getUniByName = async (name: string) => {
   try {
     const regex = new RegExp(name, "i");
@@ -31,7 +30,7 @@ export const getUniByName = async (name: string) => {
     console.error("Error getting university by name:", error.message);
     throw error;
   }
-};
+}; //returns a uni by its name
 
 export const updateUniById = async (
   id: string,
@@ -48,13 +47,12 @@ export const updateUniById = async (
       },
     },
     { new: true }
-  ); 
-};
+  );
+}; //updates a uni's metrics
 
 export const updateUniOverall = (id: string, rating: Number) =>
   UniModel.findByIdAndUpdate(
     id,
     { $push: { overallRating: rating } },
     { new: true } // Set to true to return the modified document rather than the original
-  );
- 
+  ); //updates a uni's overall rating

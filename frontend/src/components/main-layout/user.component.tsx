@@ -8,7 +8,7 @@ export const UserStatus: React.FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   useEffect(() => {
-    // Fetch the list of universities from your API endpoint
+    // Fetch the user's username
     const getuser = async () => {
       try {
         const us = await axios.get("http://localhost:8080/username", {
@@ -32,12 +32,10 @@ export const UserStatus: React.FC = () => {
   };
 
   const handleLogout = () => {
-    // Implement your logout logic here
-    // For example, clear the session token, redirect, etc.
     document.cookie =
-      "CR-AUTH=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      "CR-AUTH=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; //clear cookies by setting expiration to the past
     setAnchorEl(null);
-    document.location.reload();
+    document.location.reload(); //refresh the page when logging out
   };
 
   return (
@@ -102,7 +100,6 @@ export const UserStatus: React.FC = () => {
             <MenuItem
               color="inherit"
               sx={{ fontWeight: "500", fontSize: "14px" }}
-              
             >
               <AnchorLink style={{ textDecoration: "none" }} href="#login">
                 LOGIN
@@ -111,7 +108,6 @@ export const UserStatus: React.FC = () => {
             <MenuItem
               color="inherit"
               sx={{ fontWeight: "500", fontSize: "14px" }}
-              
             >
               <AnchorLink style={{ textDecoration: "none" }} href="#signup">
                 REGISTER

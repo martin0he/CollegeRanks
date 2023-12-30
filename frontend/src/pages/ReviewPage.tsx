@@ -109,10 +109,10 @@ export const ReviewPage: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    // Fetch the list of universities from your API endpoint
+    // Fetch the list of university names
     const fetchUniversities = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/unis/names"); // Replace with your actual API endpoint
+        const response = await axios.get("http://localhost:8080/unis/names");
         setUniversities(response.data);
       } catch (error) {
         console.error("Error fetching universities:", error);
@@ -122,14 +122,13 @@ export const ReviewPage: React.FC = () => {
     fetchUniversities();
   }, []);
 
-
-
   useEffect(() => {
-    // Fetch the list of universities from your API endpoint
+    // verify current user status
     const verify = async () => {
       try {
-        const verification = await axios.get("http://localhost:8080/verify", 
-        { withCredentials: true });
+        const verification = await axios.get("http://localhost:8080/verify", {
+          withCredentials: true,
+        });
         setIsLoggedIn(verification.data);
       } catch (error) {
         console.log("Could not verify:", error);
@@ -137,7 +136,7 @@ export const ReviewPage: React.FC = () => {
     };
 
     verify();
-  }, []); 
+  }, []);
 
   const handleSubmit = async () => {
     try {
@@ -147,8 +146,7 @@ export const ReviewPage: React.FC = () => {
       });
 
       if (response.data) {
-        
-        const selectedUni = response.data; // Assuming the API response structure
+        const selectedUni = response.data;
 
         const updateRating = await axios.patch(
           `http://localhost:8080/uni/overall/${selectedUni._id}`,
@@ -162,7 +160,6 @@ export const ReviewPage: React.FC = () => {
 
         // Update the ratings on the server
         const updateResponse = await axios.patch(
-          //works, but receives wrong input from .get
           `http://localhost:8080/uni/metrics/${selectedUni._id}`,
           {
             ratings: sliderValues,
@@ -170,7 +167,6 @@ export const ReviewPage: React.FC = () => {
           { withCredentials: true }
         );
 
-        // Log the updated university (replace with your actual update logic)
         console.log("Updated University:", updateResponse.data);
       } else {
         console.error("University not found");
@@ -209,8 +205,7 @@ export const ReviewPage: React.FC = () => {
                     value={sliderValues[metric]}
                     onChange={handleSliderChange(metric)}
                     onBlur={handleBlur(metric)}
-                    
-                   />
+                  />
                   <TextField
                     size="small"
                     id={`${metric}-input`}
@@ -254,7 +249,7 @@ export const ReviewPage: React.FC = () => {
           <Box>
             <Autocomplete
               options={universities}
-              getOptionLabel={(universities) => universities} // Adjust based on the structure of your university objects
+              getOptionLabel={(universities) => universities}
               value={selectedUniversity}
               onChange={(event, newValue) => {
                 setSelectedUniversity(newValue);

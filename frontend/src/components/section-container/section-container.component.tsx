@@ -1,12 +1,15 @@
-import { Box, Container } from '@mui/material';
-import { SectionIdEnum } from '../../types/section-id/section-id';
+import { Box, Container } from "@mui/material";
+import { SectionIdEnum } from "../../types/section-id/section-id";
 
 export type SectionContainerProps = {
   children: React.ReactNode;
   sectionId: SectionIdEnum;
 };
 
-export const SectionContainer: React.FC<SectionContainerProps> = ({ children, sectionId }) => {
+export const SectionContainer: React.FC<SectionContainerProps> = ({
+  children,
+  sectionId,
+}) => {
   return (
     <div id={sectionId} key={sectionId}>
       <Container>

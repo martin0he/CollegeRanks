@@ -5,7 +5,6 @@ import {
   AutocompleteChangeDetails,
   AutocompleteChangeReason,
   Box,
-  Button,
   TextField,
 } from "@mui/material";
 
@@ -496,7 +495,7 @@ const ChartComponent: React.FC = () => {
       const selectedCountryCode = nameToCode[value];
       setSelectedCountry(value);
 
-      // Filter the chart data by the selected country code
+      // Filter the chart data by the selected country
       uniChart.setFilter({
         country: selectedCountryCode,
       });
@@ -515,17 +514,13 @@ const ChartComponent: React.FC = () => {
     setInputValue(newInputValue);
   };
 
-  const handleRefreshChart = () => {
-    uniChart.refresh();
-  };
-
   return (
     <>
       <div id="chart-data" style={{ height: 500 }}></div>
       <Box>
         <Autocomplete
           options={countryNames}
-          getOptionLabel={(countryNames) => countryNames} // Adjust based on the structure of your university objects
+          getOptionLabel={(countryNames) => countryNames}
           value={selectedCountry}
           inputValue={inputValue}
           onInputChange={handleInputChange}

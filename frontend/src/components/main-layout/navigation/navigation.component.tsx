@@ -15,7 +15,6 @@ import { TransitionProps } from "@mui/material/transitions";
 import React, { useState } from "react";
 import { SectionIdEnum } from "../../../types/section-id/section-id";
 import AnchorLink from "react-anchor-link-smooth-scroll";
-import { UserStatus } from "../user.component";
 
 export type NavigationProps = {
   isSmall: boolean;
@@ -38,7 +37,6 @@ const navigationItems = [
     text: "School Info",
     to: SectionIdEnum.schoolinfo,
   },
- 
 ];
 
 const Transition = React.forwardRef(
@@ -126,7 +124,6 @@ export const Navigation: React.FC<NavigationProps> = ({ isSmall }) => {
             }}
           >
             {mappedItems}
-            
           </Box>
         </Dialog>
       </Hidden>

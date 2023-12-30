@@ -32,15 +32,17 @@ export const isAuthenticated = async (
   next: express.NextFunction
 ) => {
   try {
-    const sessionToken = req.cookies["CR-AUTH"];
+    const sessionToken = req.cookies["CR-AUTH"]; //access cookies
 
     if (!sessionToken) {
+      //if there are no cookies present, return error
       return res.sendStatus(403);
     }
 
-    const existingUser = await getUserBySessionToken(sessionToken);
+    const existingUser = await getUserBySessionToken(sessionToken); //gets user by cookies
 
     if (!existingUser) {
+      //if there is no user, then no one is logged in, returns error
       return res.sendStatus(403);
     }
 
@@ -51,4 +53,3 @@ export const isAuthenticated = async (
     return res.sendStatus(400);
   }
 };
-

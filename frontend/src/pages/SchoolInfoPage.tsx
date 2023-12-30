@@ -19,14 +19,13 @@ export const SchoolInfoPage: React.FC = () => {
   const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
-    // Fetch the list of universities from your API endpoint
+    // Fetch the list of university names
     const fetchUniversities = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/unis/names"); // Replace with your actual API endpoint
+        const response = await axios.get("http://localhost:8080/unis/names");
         setUniversities(response.data);
       } catch (error) {
         console.error("Error fetching universities:", error);
-        
       }
     };
 
@@ -41,19 +40,16 @@ export const SchoolInfoPage: React.FC = () => {
       });
 
       if (response.data) {
-        const selectedUni = response.data; // Assuming the API response structure
+        const selectedUni = response.data;
 
         const stats = await axios.get(
           `http://localhost:8080/uni/metrics/${selectedUni._id}`
-        );
+        ); // selected university's metrics
         const overall = await axios.get(
           `http://localhost:8080/uni/overall/${selectedUni._id}`
-        );
+        ); // selected university's overall rating
         setUniOverall(overall.data?.average);
         setUniStats(stats.data);
-        console.log(overall.data);
-        console.log(stats.data);
-
         // Update the ratings on the server
       } else {
         setError(error);
@@ -69,11 +65,15 @@ export const SchoolInfoPage: React.FC = () => {
       <Typography variant="h4" px={3} mt={3}>
         <b>Check Your School</b>
       </Typography>
-      <Grid container direction="column" sx={{
-              justifyContent: "center",
-              alignItems: "center",
-              display: "flex",
-            }}>
+      <Grid
+        container
+        direction="column"
+        sx={{
+          justifyContent: "center",
+          alignItems: "center",
+          display: "flex",
+        }}
+      >
         <Grid item px={3}>
           <Box
             sx={{
@@ -85,14 +85,14 @@ export const SchoolInfoPage: React.FC = () => {
           >
             <Autocomplete
               options={universities}
-              getOptionLabel={(universities) => universities} // Adjust based on the structure of your university objects
+              getOptionLabel={(universities) => universities}
               value={selectedUniversity}
               onChange={(event, newValue) => {
                 setSelectedUniversity(newValue);
               }}
               inputValue={inputValue}
               onInputChange={(event, newInputValue) => {
-                setInputValue(newInputValue); 
+                setInputValue(newInputValue);
               }}
               fullWidth
               renderInput={(params) => (
@@ -104,53 +104,76 @@ export const SchoolInfoPage: React.FC = () => {
                 />
               )}
             />
-            <Button variant="contained" color="inherit" onClick={handleSubmit} sx={{ bgcolor: "inherit", "&:hover": { bgcolor: "#f5f4f3" }, }}>
+            <Button
+              variant="contained"
+              color="inherit"
+              onClick={handleSubmit}
+              sx={{ bgcolor: "inherit", "&:hover": { bgcolor: "#f5f4f3" } }}
+            >
               Check
             </Button>
           </Box>
         </Grid>
         <Grid
-        item
-        sx={{
-          justifyContent: "center",
-          alignItems: "center",
-          display: "flex",
-        }}
-        paddingBottom={4}
-        px={5}
-      >
-        <Box>
-          <Grid container fontSize="16px" sx={{ justifyContent: "center", alignItems: "center", display: "flex" }}>
-            {error ? (
-              <Typography variant="subtitle1" color="error">
-                {error}
-              </Typography>
-            ) : (
-              Object.entries(uniStats).map(([metric, average]) => (
-                <Grid container spacing={12} sx={{ justifyContent: "center", alignItems: "center", display: "flex" }}>
-                  <Grid item key={metric} xs={4} sm={5} md={6}>
-                    <Typography variant="subtitle1" fontSize="1.1em">
-                      {`${metric}: `}
-                    </Typography>
+          item
+          sx={{
+            justifyContent: "center",
+            alignItems: "center",
+            display: "flex",
+          }}
+          paddingBottom={4}
+          px={5}
+        >
+          <Box>
+            <Grid
+              container
+              fontSize="16px"
+              sx={{
+                justifyContent: "center",
+                alignItems: "center",
+                display: "flex",
+              }}
+            >
+              {error ? (
+                <Typography variant="subtitle1" color="error">
+                  {error}
+                </Typography>
+              ) : (
+                Object.entries(uniStats).map(([metric, average]) => (
+                  <Grid
+                    container
+                    spacing={12}
+                    sx={{
+                      justifyContent: "center",
+                      alignItems: "center",
+                      display: "flex",
+                    }}
+                  >
+                    <Grid item key={metric} xs={4} sm={5} md={6}>
+                      <Typography variant="subtitle1" fontSize="1.1em">
+                        {`${metric}: `}
+                      </Typography>
+                    </Grid>
+                    <Grid item key={metric}>
+                      <Typography variant="subtitle1" fontSize="1.1em">
+                        {`${average}`}
+                      </Typography>
+                    </Grid>
                   </Grid>
-                  <Grid item key={metric}>
-                    <Typography variant="subtitle1" fontSize="1.1em">
-                      {`${average}`}
-                    </Typography>
-                  </Grid>
-                </Grid>
-              ))
-            )}
-            <Grid item>
-              <Typography fontSize="1.1em" fontWeight={500}>{`Overall Rating: ${
-                uniOverall !== null ? uniOverall.toFixed(2) : "N/A"
-              }`}</Typography>
+                ))
+              )}
+              <Grid item>
+                <Typography
+                  fontSize="1.1em"
+                  fontWeight={500}
+                >{`Overall Rating: ${
+                  uniOverall !== null ? uniOverall.toFixed(2) : "N/A"
+                }`}</Typography>
+              </Grid>
             </Grid>
-          </Grid>
-        </Box>
+          </Box>
+        </Grid>
       </Grid>
-      </Grid>
-      
     </Box>
   );
 };
