@@ -22,7 +22,7 @@ export const SchoolInfoPage: React.FC = () => {
     // Fetch the list of university names
     const fetchUniversities = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/unis/names");
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/unis/names`);
         setUniversities(response.data);
       } catch (error) {
         console.error("Error fetching universities:", error);
@@ -35,7 +35,7 @@ export const SchoolInfoPage: React.FC = () => {
   const handleSubmit = async () => {
     try {
       // Call the backend API to get the university by name
-      const response = await axios.post("http://localhost:8080/uni", {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/uni`, {
         name: selectedUniversity,
       });
 
@@ -43,10 +43,10 @@ export const SchoolInfoPage: React.FC = () => {
         const selectedUni = response.data;
 
         const stats = await axios.get(
-          `http://localhost:8080/uni/metrics/${selectedUni._id}`
+          `${import.meta.env.VITE_BACKEND_URL}/uni/metrics/${selectedUni._id}`
         ); // selected university's metrics
         const overall = await axios.get(
-          `http://localhost:8080/uni/overall/${selectedUni._id}`
+          `${import.meta.env.VITE_BACKEND_URL}/uni/overall/${selectedUni._id}`
         ); // selected university's overall rating
         setUniOverall(overall.data?.average);
         setUniStats(stats.data);

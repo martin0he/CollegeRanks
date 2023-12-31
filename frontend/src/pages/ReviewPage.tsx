@@ -112,7 +112,7 @@ export const ReviewPage: React.FC = () => {
     // Fetch the list of university names
     const fetchUniversities = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/unis/names");
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/unis/names`);
         setUniversities(response.data);
       } catch (error) {
         console.error("Error fetching universities:", error);
@@ -126,7 +126,7 @@ export const ReviewPage: React.FC = () => {
     // verify current user status
     const verify = async () => {
       try {
-        const verification = await axios.get("http://localhost:8080/verify", {
+        const verification = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/verify`, {
           withCredentials: true,
         });
         setIsLoggedIn(verification.data);
@@ -141,7 +141,7 @@ export const ReviewPage: React.FC = () => {
   const handleSubmit = async () => {
     try {
       // Call the backend API to get the university by name
-      const response = await axios.post("http://localhost:8080/uni", {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/uni`, {
         name: selectedUniversity,
       });
 
@@ -149,7 +149,7 @@ export const ReviewPage: React.FC = () => {
         const selectedUni = response.data;
 
         const updateRating = await axios.patch(
-          `http://localhost:8080/uni/overall/${selectedUni._id}`,
+          `${import.meta.env.VITE_BACKEND_URL}/uni/overall/${selectedUni._id}`,
           {
             overallRating: calculateWeightedAverage(),
           },
@@ -160,7 +160,7 @@ export const ReviewPage: React.FC = () => {
 
         // Update the ratings on the server
         const updateResponse = await axios.patch(
-          `http://localhost:8080/uni/metrics/${selectedUni._id}`,
+          `${import.meta.env.VITE_BACKEND_URL}/uni/metrics/${selectedUni._id}`,
           {
             ratings: sliderValues,
           },

@@ -19,7 +19,7 @@ export const LoginPage: React.FC = () => {
   const handleLogin = async () => {
     try {
       //authenticate user logging in
-      const response = await fetch("http://localhost:8080/auth/login", {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/login`, {
         method: "POST",
         credentials: "include",
         headers: {
