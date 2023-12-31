@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently -n \"FE,BE\" -c \"white,blue\" -p \"[{name}]\"  \"cd backend && npm run dev\" \"cd frontend && npm run dev\" "
+    "start": "concurrently -n \"FE,BE\" -c \"white,blue\" -p \"[{name}]\"  \"cd backend && npm run start\" \"cd frontend && npm run start\" ",
+    "dev": "concurrently -n \"FE,BE\" -c \"white,blue\" -p \"[{name}]\"  \"cd backend && npm run dev\" \"cd frontend && npm run dev\" ",
+    "build": "concurrently -n \"FE,BE\" -c \"white,blue\" -p \"[{name}]\"  \"cd backend && npm run build\" \"cd frontend && npm run build\" "
   },
   "keywords": [],
   "author": "",
