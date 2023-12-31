@@ -491,6 +491,7 @@ const ChartComponent: React.FC = () => {
     reason: AutocompleteChangeReason,
     details?: AutocompleteChangeDetails<string> | undefined
   ) => {
+    console.log(event, details);
     if (reason === "selectOption" && value) {
       const selectedCountryCode = nameToCode[value];
       setSelectedCountry(value);
@@ -506,6 +507,7 @@ const ChartComponent: React.FC = () => {
     event: React.SyntheticEvent<Element, Event>,
     newInputValue: string
   ) => {
+    console.log(event)
     // If the input value is empty, clear the filter
     if (newInputValue === "") {
       uniChart.setFilter({});

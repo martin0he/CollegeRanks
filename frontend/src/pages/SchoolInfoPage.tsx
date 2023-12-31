@@ -88,10 +88,12 @@ export const SchoolInfoPage: React.FC = () => {
               getOptionLabel={(universities) => universities}
               value={selectedUniversity}
               onChange={(event, newValue) => {
+                console.log('Event:', event);
                 setSelectedUniversity(newValue);
               }}
               inputValue={inputValue}
               onInputChange={(event, newInputValue) => {
+                console.log('Event:', event);
                 setInputValue(newInputValue);
               }}
               fullWidth

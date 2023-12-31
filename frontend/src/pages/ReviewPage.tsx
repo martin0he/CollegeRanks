@@ -58,6 +58,7 @@ export const ReviewPage: React.FC = () => {
 
   const handleSliderChange =
     (metric: string) => (event: Event, newValue: number | number[]) => {
+      console.log('Event:', event);
       setSliderValues((prevValues) => ({
         ...prevValues,
         [metric]: newValue as number,
@@ -253,10 +254,12 @@ export const ReviewPage: React.FC = () => {
               value={selectedUniversity}
               onChange={(event, newValue) => {
                 setSelectedUniversity(newValue);
+                console.log('Event:', event);
               }}
               inputValue={inputValue}
               onInputChange={(event, newInputValue) => {
                 setInputValue(newInputValue);
+                console.log('Event:', event);
               }}
               fullWidth
               renderInput={(params) => (
