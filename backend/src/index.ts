@@ -6,14 +6,14 @@ import compression from "compression";
 import cors from "cors";
 import mongoose from "mongoose";
 import router from "./router";
-import { config } from 'dotenv';
-config()
+import { config } from "dotenv";
+config();
 
 const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:3000", "https://collegeranks.onrender.com/"],
     credentials: true,
   })
 );
