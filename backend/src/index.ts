@@ -31,8 +31,12 @@ server.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}/`);
 });
 
+// Enable CORS for specific origin and with credentials
 app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
-  cors()(req, res, (err?: any) => {
+  cors({
+    origin: "https://collegeranks.onrender.com",
+    credentials: true,
+  })(req, res, (err?: any) => {
     if (err) {
       return next(err);
     }
