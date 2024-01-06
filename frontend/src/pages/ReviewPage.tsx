@@ -130,10 +130,8 @@ export const ReviewPage: React.FC = () => {
     const verify = async () => {
       try {
         const verification = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/verify`,
-          {
-            withCredentials: true,
-          }
+          `${import.meta.env.VITE_BACKEND_URL}/verify`
+
         );
         setIsLoggedIn(verification.data);
       } catch (error) {
