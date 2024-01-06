@@ -11,14 +11,27 @@ config();
 
 const app = express();
 
-app.use(
-  cors({
-    origin: "https://collegeranks.onrender.com",
-    credentials: true,
-  })
-);
 
 
+app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
+  const allowedOrigins = ["https://collegeranks.onrender.com", "http://localhost:3000/"];
+
+  const origin = req.headers.origin as string;
+
+  if (allowedOrigins.includes(origin)) {
+    res.header("Access-Control-Allow-Origin", origin);
+  }
+
+  // You can adjust other CORS headers as needed
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+  // Allow credentials if needed
+  res.header("Access-Control-Allow-Credentials", "true");
+
+  // Continue with the request
+  next();
+});
 
 app.use(compression());
 app.use(cookieParser());
@@ -31,18 +44,7 @@ server.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}/`);
 });
 
-// Enable CORS for specific origin and with credentials
-app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
-  cors({
-    origin: "https://collegeranks.onrender.com",
-    credentials: true,
-  })(req, res, (err?: any) => {
-    if (err) {
-      return next(err);
-    }
-    next();
-  });
-});
+
 
 const uri = process.env.MONGO_URI;
 mongoose.Promise = Promise;
