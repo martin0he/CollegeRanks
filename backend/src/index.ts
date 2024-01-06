@@ -14,7 +14,7 @@ const app = express();
 app.use(
   cors({
     origin: "https://collegeranks.onrender.com/",
-    
+    credentials: true,
   })
 );
 
@@ -29,6 +29,12 @@ const server = http.createServer(app);
 const PORT = process.env.PORT || 8080
 server.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}/`);
+});
+
+app.all('/', (req: express.Request, res: express.Response, next: express.NextFunction) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
 });
 
 const uri = process.env.MONGO_URI;
