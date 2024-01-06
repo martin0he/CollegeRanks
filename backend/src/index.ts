@@ -13,7 +13,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["https://collegeranks.onrender.com"],
+    origin: ["http://localhost:3000", "https://collegeranks.onrender.com"],
     credentials: true,
   })
 );
@@ -24,9 +24,9 @@ app.use(bodyParser.json());
 
 const server = http.createServer(app);
 
-const PORT = process.env.PORT || 8080;
-server.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}/`);
+
+server.listen(8080, () => {
+  console.log(`Server running on http://localhost:8080/`);
 });
 
 const uri = process.env.MONGO_URI;
