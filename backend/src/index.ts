@@ -13,10 +13,12 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://collegeranks.onrender.com"],
+    origin: ["http://localhost:3000", "https://collegeranks.onrender.com/"],
     credentials: true,
   })
 );
+
+
 
 app.use(compression());
 app.use(cookieParser());
