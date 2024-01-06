@@ -23,7 +23,12 @@ export const SchoolInfoPage: React.FC = () => {
     const fetchUniversities = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/unis/names`
+          `${import.meta.env.VITE_BACKEND_URL}/unis/names`,
+          {
+            headers: {
+              "Access-Control-Allow-Credentials": true,
+            }
+          }
         );
         setUniversities(response.data);
       } catch (error) {

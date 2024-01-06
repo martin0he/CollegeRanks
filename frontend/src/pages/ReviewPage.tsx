@@ -114,7 +114,12 @@ export const ReviewPage: React.FC = () => {
     const fetchUniversities = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/unis/names`
+          `${import.meta.env.VITE_BACKEND_URL}/unis/names`,
+          {
+            headers: {
+              "Access-Control-Allow-Credentials": true,
+            },
+          }
         );
         setUniversities(response.data);
       } catch (error) {
@@ -132,7 +137,9 @@ export const ReviewPage: React.FC = () => {
         const verification = await axios.get(
           `${import.meta.env.VITE_BACKEND_URL}/verify`,
           {
-            withCredentials: true,
+            headers: {
+              "Access-Control-Allow-Credentials": true,
+            },
           }
         );
         setIsLoggedIn(verification.data);
@@ -151,6 +158,11 @@ export const ReviewPage: React.FC = () => {
         `${import.meta.env.VITE_BACKEND_URL}/uni`,
         {
           name: selectedUniversity,
+        },
+        {
+          headers: {
+            "Access-Control-Allow-Credentials": true,
+          },
         }
       );
 
@@ -162,7 +174,11 @@ export const ReviewPage: React.FC = () => {
           {
             overallRating: calculateWeightedAverage(),
           },
-          { withCredentials: true }
+          {
+            headers: {
+              "Access-Control-Allow-Credentials": true,
+            },
+          }
         );
 
         console.log(updateRating.data);
@@ -173,7 +189,11 @@ export const ReviewPage: React.FC = () => {
           {
             ratings: sliderValues,
           },
-          { withCredentials: true }
+          {
+            headers: {
+              "Access-Control-Allow-Credentials": true,
+            },
+          }
         );
 
         console.log("Updated University:", updateResponse.data);

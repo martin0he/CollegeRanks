@@ -3,19 +3,22 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 
-
-
 export const UserStatus: React.FC = () => {
   const [username, setUsername] = useState<string | null>(null);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  
+
   useEffect(() => {
     // Fetch the user's username
     const getuser = async () => {
       try {
-        const us = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/username`, {
-          withCredentials: true,
-        });
+        const us = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/username`,
+          {
+            headers: {
+              "Access-Control-Allow-Credentials": true,
+            },
+          }
+        );
         setUsername(us.data);
       } catch (error) {
         console.log("Could not verify:", error);
