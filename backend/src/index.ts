@@ -23,10 +23,20 @@ app.use(bodyParser.json());
 
 const server = http.createServer(app);
 
+app.use((req, res, next) => {
+  // Set Access-Control-Allow-Credentials header to true
+  res.header("Access-Control-Allow-Credentials", "true");
+
+  // Continue with the request
+  next();
+});
+
+
 const PORT = process.env.PORT || 8080
 server.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}/`);
 });
+
 
 
 
