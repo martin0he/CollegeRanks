@@ -13,7 +13,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://collegeranks.onrender.com/",
+    origin: "https://collegeranks.onrender.com",
     credentials: true,
   })
 );
