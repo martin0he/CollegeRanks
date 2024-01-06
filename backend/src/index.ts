@@ -31,10 +31,13 @@ server.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}/`);
 });
 
-app.all('/', (req: express.Request, res: express.Response, next: express.NextFunction) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next();
+app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
+  cors()(req, res, (err?: any) => {
+    if (err) {
+      return next(err);
+    }
+    next();
+  });
 });
 
 const uri = process.env.MONGO_URI;
