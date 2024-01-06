@@ -39,7 +39,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                 gap={0.6}
                 sx={{ cursor: "pointer" }}
               >
-                <img width="54px" height="54px" src={logoImg} alt="logo" />
+                <img width="48px" height="48px" src={logoImg} alt="logo" />
                 <Typography
                   sx={{
                     width: "fit-content",

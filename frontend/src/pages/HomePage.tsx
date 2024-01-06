@@ -18,12 +18,12 @@ export const HomePage: React.FC = () => {
           >
             How it works
           </Typography>
-          <p>
+          <Typography sx={{ color: "black" }}>
             CollegeRanks is a tool used to gauge the population’s ranking of
             colleges and universities around the world based on users’ reviews
             and nothing more. Simply sign up, enter your college/university, and
             rate your school based on the metrics provided.
-          </p>
+          </Typography>
         </Grid>
         <Grid item xs={12} py={2}>
           <Grid container>

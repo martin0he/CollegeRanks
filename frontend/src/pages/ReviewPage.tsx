@@ -58,7 +58,7 @@ export const ReviewPage: React.FC = () => {
 
   const handleSliderChange =
     (metric: string) => (event: Event, newValue: number | number[]) => {
-      console.log('Event:', event);
+      console.log("Event:", event);
       setSliderValues((prevValues) => ({
         ...prevValues,
         [metric]: newValue as number,
@@ -113,7 +113,9 @@ export const ReviewPage: React.FC = () => {
     // Fetch the list of university names
     const fetchUniversities = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/unis/names`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/unis/names`
+        );
         setUniversities(response.data);
       } catch (error) {
         console.error("Error fetching universities:", error);
@@ -127,9 +129,12 @@ export const ReviewPage: React.FC = () => {
     // verify current user status
     const verify = async () => {
       try {
-        const verification = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/verify`, {
-          withCredentials: true,
-        });
+        const verification = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/verify`,
+          {
+            withCredentials: true,
+          }
+        );
         setIsLoggedIn(verification.data);
       } catch (error) {
         console.log("Could not verify:", error);
@@ -142,9 +147,12 @@ export const ReviewPage: React.FC = () => {
   const handleSubmit = async () => {
     try {
       // Call the backend API to get the university by name
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/uni`, {
-        name: selectedUniversity,
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/uni`,
+        {
+          name: selectedUniversity,
+        }
+      );
 
       if (response.data) {
         const selectedUni = response.data;
@@ -194,7 +202,12 @@ export const ReviewPage: React.FC = () => {
                     sx={{ width: "0%" }}
                     placement="top-start"
                   >
-                    <Typography variant="subtitle2" gutterBottom>
+                    <Typography
+                      variant="subtitle2"
+                      fontWeight={500}
+                      gutterBottom
+                      color="black"
+                    >
                       {metric}
                     </Typography>
                   </Tooltip>
@@ -254,12 +267,12 @@ export const ReviewPage: React.FC = () => {
               value={selectedUniversity}
               onChange={(event, newValue) => {
                 setSelectedUniversity(newValue);
-                console.log('Event:', event);
+                console.log("Event:", event);
               }}
               inputValue={inputValue}
               onInputChange={(event, newInputValue) => {
                 setInputValue(newInputValue);
-                console.log('Event:', event);
+                console.log("Event:", event);
               }}
               fullWidth
               renderInput={(params) => (

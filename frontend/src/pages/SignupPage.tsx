@@ -19,17 +19,20 @@ export const SignupPage: React.FC = () => {
 
   const handleRegister = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: name,
-          email: email,
-          password: password,
-        }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/auth/register`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: name,
+            email: email,
+            password: password,
+          }),
+        }
+      );
 
       if (response.ok) {
         // Registration successful
@@ -50,7 +53,9 @@ export const SignupPage: React.FC = () => {
         <Box
           sx={{
             mt: 5,
+            mb: 3,
             display: "flex",
+            justifyContent: "center",
             flexDirection: "column",
             alignItems: "center",
           }}
@@ -114,7 +119,14 @@ export const SignupPage: React.FC = () => {
             </Button>
             <Grid container justifyContent={"flex-end"}>
               <Grid item>
-                <AnchorLink style={{ textDecoration: "none" }} href="#login">
+                <AnchorLink
+                  style={{
+                    textDecoration: "none",
+                    color: "black",
+                    textDecorationLine: "underline",
+                  }}
+                  href="#login"
+                >
                   Already have an account? Login Here
                 </AnchorLink>
               </Grid>

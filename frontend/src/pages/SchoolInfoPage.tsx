@@ -22,7 +22,9 @@ export const SchoolInfoPage: React.FC = () => {
     // Fetch the list of university names
     const fetchUniversities = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/unis/names`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/unis/names`
+        );
         setUniversities(response.data);
       } catch (error) {
         console.error("Error fetching universities:", error);
@@ -35,9 +37,12 @@ export const SchoolInfoPage: React.FC = () => {
   const handleSubmit = async () => {
     try {
       // Call the backend API to get the university by name
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/uni`, {
-        name: selectedUniversity,
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/uni`,
+        {
+          name: selectedUniversity,
+        }
+      );
 
       if (response.data) {
         const selectedUni = response.data;
@@ -88,12 +93,12 @@ export const SchoolInfoPage: React.FC = () => {
               getOptionLabel={(universities) => universities}
               value={selectedUniversity}
               onChange={(event, newValue) => {
-                console.log('Event:', event);
+                console.log("Event:", event);
                 setSelectedUniversity(newValue);
               }}
               inputValue={inputValue}
               onInputChange={(event, newInputValue) => {
-                console.log('Event:', event);
+                console.log("Event:", event);
                 setInputValue(newInputValue);
               }}
               fullWidth
@@ -152,12 +157,20 @@ export const SchoolInfoPage: React.FC = () => {
                     }}
                   >
                     <Grid item key={metric} xs={4} sm={5} md={6}>
-                      <Typography variant="subtitle1" fontSize="1.1em">
+                      <Typography
+                        variant="subtitle1"
+                        fontSize="1.1em"
+                        color="black"
+                      >
                         {`${metric}: `}
                       </Typography>
                     </Grid>
                     <Grid item key={metric}>
-                      <Typography variant="subtitle1" fontSize="1.1em">
+                      <Typography
+                        variant="subtitle1"
+                        fontSize="1.1em"
+                        color="black"
+                      >
                         {`${average}`}
                       </Typography>
                     </Grid>
