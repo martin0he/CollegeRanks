@@ -14,7 +14,11 @@ const app = express();
 
 app.use(cors({
   origin: ["https://collegeranks.onrender.com", "http://localhost:3000/"],
+  methods: 'GET, POST, DELETE',
   credentials: true,
+  preflightContinue: true,
+  exposedHeaders: '*',
+  optionsSuccessStatus: 204
 }));
 
 app.use(compression());
