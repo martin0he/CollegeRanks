@@ -13,7 +13,7 @@ const app = express();
 
 
 app.use(cors({
-  origin: ["https://collegeranks.onrender.com", "http://localhost:3000/"],
+  origin: "http://localhost:3000/",
   methods: 'GET, POST, DELETE',
   credentials: true,
   preflightContinue: true,
@@ -30,13 +30,11 @@ const server = http.createServer(app);
 app.use((req, res, next) => {
   // Set Access-Control-Allow-Credentials header to true
   res.header("Access-Control-Allow-Credentials", "true");
-
-  // Continue with the request
   next();
 });
 
 
-const PORT = process.env.PORT || 8080
+const PORT = 8080
 server.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}/`);
 });
